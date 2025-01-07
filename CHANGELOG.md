@@ -219,3 +219,4 @@ This professional edition includes:
 **Release Date**: 2026-05-03
 
 **Status**: ✅ Production Ready
+- [2025-01-07]: feat: implement short URL expiration and auto-cleanup
