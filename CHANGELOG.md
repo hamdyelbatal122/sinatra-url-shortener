@@ -223,3 +223,4 @@ This professional edition includes:
 - [2025-01-14]: refactor: replace manual SQL with Sequel ORM dataset methods
 - [2025-01-21]: feat: add click analytics tracking per shortened URL
 - [2025-01-28]: chore: add rubocop config and fix style violations
+- [2025-02-04]: feat: add user dashboard with link management table
