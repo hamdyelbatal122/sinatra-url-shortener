@@ -225,3 +225,4 @@ This professional edition includes:
 - [2025-01-28]: chore: add rubocop config and fix style violations
 - [2025-02-04]: feat: add user dashboard with link management table
 - [2025-02-11]: fix: resolve redirect loop when short code not found
+- [2025-02-18]: refactor: extract URL validation into dedicated service class
