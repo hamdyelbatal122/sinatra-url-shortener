@@ -226,3 +226,4 @@ This professional edition includes:
 - [2025-02-04]: feat: add user dashboard with link management table
 - [2025-02-11]: fix: resolve redirect loop when short code not found
 - [2025-02-18]: refactor: extract URL validation into dedicated service class
+- [2025-02-25]: docs: add API endpoint reference to README
