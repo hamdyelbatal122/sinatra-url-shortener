@@ -228,3 +228,4 @@ This professional edition includes:
 - [2025-02-18]: refactor: extract URL validation into dedicated service class
 - [2025-02-25]: docs: add API endpoint reference to README
 - [2025-03-04]: feat: add rate limiting via Rack::Attack for anonymous users
+- [2025-03-11]: fix: sanitize custom alias input to prevent XSS injection
