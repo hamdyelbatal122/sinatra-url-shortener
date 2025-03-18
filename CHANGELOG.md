@@ -229,3 +229,4 @@ This professional edition includes:
 - [2025-02-25]: docs: add API endpoint reference to README
 - [2025-03-04]: feat: add rate limiting via Rack::Attack for anonymous users
 - [2025-03-11]: fix: sanitize custom alias input to prevent XSS injection
+- [2025-03-18]: chore: update Rack and Sinatra gems to latest stable versions
