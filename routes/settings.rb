@@ -33,3 +33,11 @@ post '/settings/password' do
   @success = 'Password updated successfully.'
   erb :settings
 end
+
+post '/settings/notifications' do
+  authenticate!
+  enabled = params[:email_notifications_enabled] == 'true'
+  current_user.update(email_notifications_enabled: enabled)
+  @success = 'Notification preferences updated.'
+  erb :settings
+end

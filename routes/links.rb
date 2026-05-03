@@ -2,7 +2,6 @@ require 'sinatra'
 require 'json'
 require_relative '../models/link'
 
-
 get '/' do
   @links = Link.order(Sequel.desc(:hits)).all
   erb :index
@@ -12,21 +11,27 @@ get '/links' do
   redirect '/'
 end
 
-
 post '/links' do
   authenticate!
   halt 403 unless can_manage_links?
   begin
+    name = InputValidation.sanitize_string(params[:name])
+    url = InputValidation.sanitize_string(params[:url])
+
+    halt 400, 'Invalid URL format' unless InputValidation.validate_url(url)
+    halt 400, 'Link name cannot be empty' if name.empty?
+
     link = Link.create(
-      name: params[:name],
-      url: params[:url],
-      category: params[:category],
-      tags: params[:tags]
+      name: name,
+      url: url,
+      category: InputValidation.sanitize_string(params[:category]),
+      tags: InputValidation.sanitize_string(params[:tags])
     )
     log_audit('create', 'Link', link.id, "Created link #{link.name}")
+    EmailService.send_link_created_notification(current_user, link)
     redirect '/'
   rescue Sequel::ValidationFailed, Sequel::DatabaseError => e
-    halt "Error: #{e.message}"
+    halt 400, "Error: #{e.message}"
   end
 end
 
@@ -75,13 +80,14 @@ get '/links/opensearch.xml' do
   erb :opensearch, layout: false
 end
 
-
 get '/links/:id/remove' do
   authenticate!
   halt 403 unless admin?
   link = Link.find(id: params[:id])
   halt 404 unless link
+  link_name = link.name
   log_audit('delete', 'Link', link.id, "Deleted link #{link.name}")
+  EmailService.send_link_deleted_notification(current_user, link_name)
   link.destroy
   redirect '/'
 end

@@ -1,0 +1,20 @@
+require 'sequel'
+
+migration 'create oauth_providers' do
+  database.create_table? :oauth_providers do
+    primary_key :id
+    Integer :user_id, null: false
+    String :provider, null: false # 'google', 'github'
+    String :uid, null: false
+    String :email, null: true
+    String :name, null: true
+    DateTime :created_at
+    index [:provider, :uid], unique: true
+    index :user_id
+    foreign_key :user_id, :users
+  end
+end
+
+class OAuthProvider < Sequel::Model
+  many_to_one :user
+end

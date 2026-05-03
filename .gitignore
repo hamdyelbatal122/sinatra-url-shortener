@@ -1,0 +1,47 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+/vendor/bundle/
+Gemfile.lock
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+db/*.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+log/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Ruby
+.ruby-version
+.ruby-gemset
+.rvmrc
+
+# Testing
+coverage/
+.rspec_status
+
+# Docker
+.dockerignore

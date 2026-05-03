@@ -1,7 +1,64 @@
-<h1>Login</h1>
-<% if @error %><p style="color:red"><%= @error %></p><% end %>
-<form method="post" action="/login">
-  <input type="text" name="username" placeholder="Username" required>
-  <input type="password" name="password" placeholder="Password" required>
-  <button>Login</button>
-</form>
+<div class="login-container">
+  <h1>Login</h1>
+  <% if @error %><p style="color:red"><%= @error %></p><% end %>
+
+  <div class="login-form">
+    <h3>Traditional Login</h3>
+    <form method="post" action="/login">
+      <input type="text" name="username" placeholder="Username" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <div class="oauth-section">
+    <h3>Or login with</h3>
+    <div class="oauth-buttons">
+      <% if ENV['GOOGLE_CLIENT_ID'] %>
+        <a href="/auth/google_oauth2" class="oauth-btn google">
+          <span>Login with Google</span>
+        </a>
+      <% end %>
+      <% if ENV['GITHUB_CLIENT_ID'] %>
+        <a href="/auth/github" class="oauth-btn github">
+          <span>Login with GitHub</span>
+        </a>
+      <% end %>
+    </div>
+  </div>
+
+  <style>
+    .login-container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+    .login-form, .oauth-section {
+      margin: 20px 0;
+    }
+    .oauth-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .oauth-btn {
+      display: block;
+      padding: 10px;
+      text-align: center;
+      border-radius: 4px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: opacity 0.3s;
+    }
+    .oauth-btn:hover {
+      opacity: 0.9;
+    }
+    .oauth-btn.google {
+      background-color: #4285F4;
+    }
+    .oauth-btn.github {
+      background-color: #333;
+    }
+  </style>
+</div>
