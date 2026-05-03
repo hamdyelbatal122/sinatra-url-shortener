@@ -10,17 +10,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        ruby-version: ['3.2']
-
     steps:
     - uses: actions/checkout@v3
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: ${{ matrix.ruby-version }}
+        ruby-version: '3.2'
         bundler-cache: true
 
     - name: Run tests
@@ -43,4 +39,5 @@ jobs:
         context: .
         push: false
         tags: sinatra-shortener:latest
+
 

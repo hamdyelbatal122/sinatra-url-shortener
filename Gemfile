@@ -39,6 +39,4 @@ end
 
 group :development do
   gem 'rswag-specs', '~> 2.13'
-  gem 'rubocop', '~> 1.50', require: false
-  gem 'bundler-audit', '~> 0.9', require: false
 end
