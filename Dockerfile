@@ -9,13 +9,12 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
   && rm -rf /var/lib/apt/lists/*
 
 COPY Gemfile ./
-RUN bundle install --jobs 4 --retry 3
+RUN bundle install
 
 COPY . .
 
 ENV RACK_ENV=production
 ENV DATABASE_URL=sqlite:///app/db/production.sqlite3
-ENV SESSION_SECRET=change-me-in-production
 
 EXPOSE 4567
 
