@@ -36,14 +36,14 @@ RSpec.describe 'Sinatra app' do
   it 'blocks reader from creating links' do
     user = create_user(username: 'reader2', password: 'password123', role: 'reader')
     post '/login', username: user.username, password: 'password123'
-    post '/links', name: 'x', url: 'https://example.com'
+    post '/links', name: 'x', url: 'https://hamzi.dev'
 
     expect(last_response.status).to eq(403)
   end
 
   it 'supports advanced search by category and tag' do
-    Link.create(name: 'docs', url: 'https://docs.example.com', category: 'dev', tags: 'ruby,sinatra')
-    Link.create(name: 'news', url: 'https://news.example.com', category: 'media', tags: 'tech')
+    Link.create(name: 'docs', url: 'https://docs.hamzi.dev', category: 'dev', tags: 'ruby,sinatra')
+    Link.create(name: 'news', url: 'https://news.hamzi.dev', category: 'media', tags: 'tech')
 
     get '/links/search', category: 'dev', tag: 'ruby'
     expect(last_response).to be_ok

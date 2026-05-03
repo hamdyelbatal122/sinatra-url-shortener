@@ -306,7 +306,7 @@ Built with:
 ## 📞 Support
 
 - **Issues**: [GitHub Issues](https://github.com/hamdyelbatal122/Sinatra/issues)
-- **Security**: security@example.com
+- **Security**: security@hamzi.dev
 - **Documentation**: See docs folder
 
 ---

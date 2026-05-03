@@ -116,7 +116,7 @@ curl http://localhost:4567/api/links
 ```bash
 curl -X POST http://localhost:4567/api/links \
   -H "Content-Type: application/json" \
-  -d '{"name":"docs","url":"https://example.com"}'
+  -d '{"name":"docs","url":"https://hamzi.dev"}'
 ```
 
 ### Get Link
@@ -224,7 +224,7 @@ bundle exec puma -p 4567 -w 4
 ## 📞 Support
 
 - **Issues**: [GitHub Issues](https://github.com/hamdyelbatal122/Sinatra/issues)
-- **Security**: security@example.com
+- **Security**: security@hamzi.dev
 - **Documentation**: See docs folder
 
 ## 🎓 Learning Resources

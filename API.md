@@ -24,7 +24,7 @@ GET /api/links
   {
     "id": 1,
     "name": "docs",
-    "url": "https://example.com/docs",
+    "url": "https://hamzi.dev/docs",
     "hits": 42,
     "category": "documentation",
     "tags": "help,reference"
@@ -46,7 +46,7 @@ GET /api/links/:id
 {
   "id": 1,
   "name": "docs",
-  "url": "https://example.com/docs",
+  "url": "https://hamzi.dev/docs",
   "hits": 42,
   "category": "documentation",
   "tags": "help,reference"
@@ -67,7 +67,7 @@ Content-Type: application/json
 ```json
 {
   "name": "docs",
-  "url": "https://example.com/docs",
+  "url": "https://hamzi.dev/docs",
   "category": "documentation",
   "tags": "help,reference"
 }
@@ -84,7 +84,7 @@ Content-Type: application/json
 {
   "id": 1,
   "name": "docs",
-  "url": "https://example.com/docs",
+  "url": "https://hamzi.dev/docs",
   "hits": 0
 }
 ```

@@ -2,7 +2,7 @@
 
 ## Reporting Security Vulnerabilities
 
-If you discover a security vulnerability, please email security@example.com instead of using the issue tracker. Please include:
+If you discover a security vulnerability, please email security@hamzi.dev instead of using the issue tracker. Please include:
 
 - Description of the vulnerability
 - Steps to reproduce
@@ -173,8 +173,8 @@ We follow responsible disclosure practices:
 
 ## Contact
 
-- **Security Issues**: security@example.com
-- **General Questions**: support@example.com
+- **Security Issues**: security@hamzi.dev
+- **General Questions**: support@hamzi.dev
 - **GitHub Issues**: https://github.com/hamdyelbatal122/Sinatra/issues
 
 ## References

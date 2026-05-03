@@ -86,7 +86,7 @@ def app
   Sinatra::Application
 end
 
-def create_user(username: 'testuser', password: 'password123', role: 'editor', email: 'test@example.com')
+def create_user(username: 'testuser', password: 'password123', role: 'editor', email: 'test@hamzi.dev')
   user = User.create(username: username, role: role, email: email)
   user.password = password
   user.save

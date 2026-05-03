@@ -46,7 +46,7 @@ describe 'Links Management' do
 
   describe 'POST /links' do
     it 'creates a new link' do
-      post '/links', name: 'docs', url: 'https://example.com/docs'
+      post '/links', name: 'docs', url: 'https://hamzi.dev/docs'
       expect(last_response).to be_redirect
       expect(Link.count).to eq(1)
       expect(Link.first.name).to eq('docs')
@@ -58,26 +58,26 @@ describe 'Links Management' do
     end
 
     it 'rejects empty name' do
-      post '/links', name: '', url: 'https://example.com'
+      post '/links', name: '', url: 'https://hamzi.dev'
       expect(last_response.status).to eq(400)
     end
 
     it 'requires authentication' do
       get '/logout'
-      post '/links', name: 'test', url: 'https://example.com'
+      post '/links', name: 'test', url: 'https://hamzi.dev'
       expect(last_response).to be_redirect
     end
   end
 
   describe 'GET /:name' do
     before do
-      Link.create(name: 'test', url: 'https://example.com', hits: 0)
+      Link.create(name: 'test', url: 'https://hamzi.dev', hits: 0)
     end
 
     it 'redirects to the target URL' do
       get '/test'
       expect(last_response).to be_redirect
-      expect(last_response.location).to include('example.com')
+      expect(last_response.location).to include('hamzi.dev')
     end
 
     it 'increments hit counter' do
@@ -96,7 +96,7 @@ describe 'Links Management' do
 
   describe 'GET /links/:id/remove' do
     before do
-      @link = Link.create(name: 'test', url: 'https://example.com')
+      @link = Link.create(name: 'test', url: 'https://hamzi.dev')
       @admin = create_user(username: 'admin', role: 'admin')
     end
 
@@ -118,7 +118,7 @@ end
 describe 'API Endpoints' do
   before do
     @user = create_user(role: 'admin')
-    @link = Link.create(name: 'api-test', url: 'https://api.example.com', hits: 5)
+    @link = Link.create(name: 'api-test', url: 'https://api.hamzi.dev', hits: 5)
   end
 
   describe 'GET /api/links' do
@@ -151,7 +151,7 @@ describe 'API Endpoints' do
 
   describe 'POST /api/links' do
     it 'creates link as admin' do
-      post '/api/links', JSON.generate(name: 'new-link', url: 'https://new.example.com'),
+      post '/api/links', JSON.generate(name: 'new-link', url: 'https://new.hamzi.dev'),
            'CONTENT_TYPE' => 'application/json'
       expect(last_response).to be_ok
       data = JSON.parse(last_response.body)
@@ -160,7 +160,7 @@ describe 'API Endpoints' do
 
     it 'rejects creation by non-admin' do
       @user.update(role: 'editor')
-      post '/api/links', JSON.generate(name: 'new-link', url: 'https://new.example.com'),
+      post '/api/links', JSON.generate(name: 'new-link', url: 'https://new.hamzi.dev'),
            'CONTENT_TYPE' => 'application/json'
       expect(last_response.status).to eq(403)
     end
@@ -212,7 +212,7 @@ end
 
 describe 'Settings' do
   before do
-    @user = create_user(email: 'user@example.com')
+    @user = create_user(email: 'user@hamzi.dev')
     login
   end
 

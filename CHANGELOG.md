@@ -209,7 +209,7 @@ This professional edition includes:
 ## 📞 Support
 
 - **Issues**: GitHub Issues
-- **Security**: security@example.com
+- **Security**: security@hamzi.dev
 - **Documentation**: See docs folder
 
 ---

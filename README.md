@@ -181,7 +181,7 @@ Content-Type: application/json
 
 {
   "name": "docs",
-  "url": "https://example.com/docs",
+  "url": "https://hamzi.dev/docs",
   "category": "documentation",
   "tags": "help,reference"
 }
