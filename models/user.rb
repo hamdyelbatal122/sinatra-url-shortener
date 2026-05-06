@@ -7,7 +7,7 @@ migration 'create users' do
     String :password_hash, null: true
     String :email, unique: true, null: true
     String :role, default: 'user', null: false
-    Boolean :email_notifications_enabled, default: true
+
     DateTime :created_at
     index :username
     index :email
