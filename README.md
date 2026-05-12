@@ -15,7 +15,7 @@ A professional, production-ready URL shortener built with Ruby and Sinatra. Feat
 - **Rate Limiting**: Built-in rate limiting to prevent abuse
 - **CSRF Protection**: Automatic CSRF token validation
 
-### Link Management
+### Link Management 
 - **Create & Manage Links**: Create, edit, and delete shortened links
 - **Advanced Search**: Search by name, URL, category, and tags
 - **Hit Tracking**: Track the number of times each link is accessed
