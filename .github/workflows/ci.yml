@@ -29,7 +29,9 @@ jobs:
           bundler-cache: true
 
       - name: Run tests
-        run: bundle exec rspec --format progress --format RspecJunitFormatter --out tmp/rspec.xml
+        run: |
+          mkdir -p tmp
+          bundle exec rspec --format progress --format RspecJunitFormatter --out tmp/rspec.xml
         env:
           RACK_ENV: test
           SESSION_SECRET: test-secret-for-ci-only
