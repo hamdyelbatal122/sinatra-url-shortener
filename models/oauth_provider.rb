@@ -14,7 +14,6 @@ migration 'create oauth_providers' do
   end
 end
 
-class OAuthProvider < Sequel::Model
-  set_dataset :oauth_providers
+class OAuthProvider < Sequel::Model(:oauth_providers)
   many_to_one :user
 end
