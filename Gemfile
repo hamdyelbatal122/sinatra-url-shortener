@@ -13,6 +13,9 @@ gem 'sqlite3', '~> 2.0'
 
 # Authentication
 gem 'bcrypt', '~> 3.1'
+gem 'omniauth', '~> 2.1'
+gem 'omniauth-google-oauth2', '~> 1.1'
+gem 'omniauth-github', '~> 2.0'
 
 # Email
 gem 'mail', '~> 2.8'

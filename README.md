@@ -1,4 +1,4 @@
-# Go — URL Shortener
+# Sinatra URL Shortener
 
 A self-hosted URL shortener built with Ruby and Sinatra. Designed to be lightweight, fast, and easy to run anywhere — from a Raspberry Pi to a Docker container.
 
