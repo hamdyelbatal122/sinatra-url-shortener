@@ -30,6 +30,7 @@ gem 'rack-attack', '~> 6.7'
 group :test do
   gem 'rspec', '~> 3.12'
   gem 'rack-test', '~> 2.1'
+  gem 'rspec_junit_formatter'
   gem 'simplecov', '~> 0.22', require: false
 end
 
