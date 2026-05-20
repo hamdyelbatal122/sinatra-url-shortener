@@ -1,42 +1,126 @@
-<h1>Go URL Shortener</h1>
+<div style="margin-bottom: 28px;">
+  <h1 class="section-title">All Links</h1>
+  <p class="section-subtitle">Browse, search, and jump to any destination instantly.</p>
+</div>
 
 <% if can_manage_links? %>
-  <%= erb :'partials/_link_form' %>
+  <!-- Add link form -->
+  <div class="card" style="margin-bottom: 24px;">
+    <div class="card-header">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 1v14M1 8h14" stroke="#58a6ff" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <h2>New Link</h2>
+    </div>
+    <div class="card-body">
+      <form method="post" action="/links" id="new-link-form">
+        <div class="form-row">
+          <div class="form-group" style="max-width:160px;">
+            <label for="link-name">Short name</label>
+            <input type="text" id="link-name" name="name" placeholder="e.g. docs" required autocomplete="off" pattern="[^\s/]+" title="No spaces or slashes">
+          </div>
+          <div class="form-group">
+            <label for="link-url">Destination URL</label>
+            <input type="url" id="link-url" name="url" placeholder="https://example.com" required>
+          </div>
+          <div class="form-group" style="max-width:150px;">
+            <label for="link-category">Category</label>
+            <input type="text" id="link-category" name="category" placeholder="Optional">
+          </div>
+          <div class="form-group" style="max-width:180px;">
+            <label for="link-tags">Tags</label>
+            <input type="text" id="link-tags" name="tags" placeholder="tag1, tag2">
+          </div>
+          <div class="form-group" style="max-width:100px; justify-content:flex-end;">
+            <label>&nbsp;</label>
+            <button type="submit" class="btn btn-blue">Add link</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 <% end %>
 
-<form method="get" action="/links/search" style="margin-top:12px;">
-  <input type="text" name="q" placeholder="Search name or URL">
-  <input type="text" name="category" placeholder="Filter category">
-  <input type="text" name="tag" placeholder="Filter tag">
-  <button type="submit">Search</button>
-</form>
+<!-- Search form -->
+<div class="card" style="margin-bottom: 24px;">
+  <div class="card-body" style="padding: 14px 20px;">
+    <form method="get" action="/links/search" id="search-form">
+      <div class="form-row" style="align-items:flex-end; gap:8px;">
+        <div class="form-group">
+          <input type="text" name="q" placeholder="Search by name or URL…" value="<%= h(params[:q].to_s) %>">
+        </div>
+        <div class="form-group" style="max-width:160px;">
+          <input type="text" name="category" placeholder="Category" value="<%= h(params[:category].to_s) %>">
+        </div>
+        <div class="form-group" style="max-width:160px;">
+          <input type="text" name="tag" placeholder="Tag" value="<%= h(params[:tag].to_s) %>">
+        </div>
+        <div style="flex-shrink:0;">
+          <button type="submit" class="btn btn-ghost">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 
-<ul>
-  <% @links.each do |link| %>
-    <li>
-      <span class="name"><a href="/<%= link.name %>"><%= link.name %></a></span>
-      <span class="url" title="<%= link.url %>"><%= link.url %></span>
-      <% if link.category %>
-        <span style="background:#e3f2fd;color:#1976d2;padding:2px 8px;border-radius:8px;font-size:0.95em;margin-left:8px;"> <%= link.category %> </span>
-      <% end %>
-      <% if link.tag_list.any? %>
-        <span style="margin-left:8px;">
-          <% link.tag_list.each do |tag| %>
-            <span style="background:#f1f8e9;color:#388e3c;padding:2px 6px;border-radius:6px;font-size:0.9em;margin-right:2px;">#<%= tag %></span>
+<!-- Links table -->
+<% if @links.empty? %>
+  <div class="empty-state">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+    </svg>
+    <p>No links yet. Add your first one above.</p>
+  </div>
+<% else %>
+  <div class="card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Short link</th>
+            <th>Destination</th>
+            <th>Labels</th>
+            <th style="text-align:right;">Hits</th>
+            <% if admin? %><th></th><% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% @links.each do |link| %>
+            <tr>
+              <td>
+                <a href="/<%= link.name %>" class="link-name" title="/<%= link.name %>">&nbsp;/<%= link.name %></a>
+              </td>
+              <td>
+                <span class="link-url" title="<%= link.url %>"><%= link.url %></span>
+              </td>
+              <td>
+                <% if link.category && !link.category.empty? %>
+                  <span class="tag tag-green"><%= link.category %></span>
+                <% end %>
+                <% link.tag_list.each do |tag| %>
+                  <span class="tag tag-blue">#<%= tag %></span>
+                <% end %>
+              </td>
+              <td style="text-align:right;">
+                <span class="hits-badge">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  <%= link.hits.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse %>
+                </span>
+              </td>
+              <% if admin? %>
+                <td style="text-align:right;">
+                  <a href="/links/<%= link.id %>/remove"
+                     class="btn btn-sm btn-danger"
+                     onclick="return confirm('Remove /<%= link.name %>? This cannot be undone.')">
+                    Remove
+                  </a>
+                </td>
+              <% end %>
+            </tr>
           <% end %>
-        </span>
-      <% end %>
-      <span class="actions">
-        <span class="hits">Hits: <%= link.hits %></span>
-        <span class="qr" title="QR Code">
-          <%= qr_code_svg(request.base_url + '/' + link.name) %>
-        </span>
-        <% if admin? %>
-          <a class="remove" href="/links/<%= link.id %>/remove" onclick="return confirm('Are you sure?');" title="Remove">Remove</a>
-        <% end %>
-      </span>
-    </li>
-  <% end %>
-</ul>
-
-<% if @links.empty? %><p>No links found.</p><% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>

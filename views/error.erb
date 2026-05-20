@@ -1,36 +1,61 @@
-<div class="error-container">
-  <h1>500 - Server Error</h1>
-  <p>Something went wrong on our end. We're working to fix it.</p>
-  <a href="/" class="btn">Go Home</a>
-  <style>
-    .error-container {
-      max-width: 600px;
-      margin: 100px auto;
-      padding: 40px;
-      text-align: center;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      background-color: #f9f9f9;
-    }
-    .error-container h1 {
-      color: #dc2626;
-      margin-bottom: 20px;
-    }
-    .error-container p {
-      color: #666;
-      margin-bottom: 30px;
-    }
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #0284c7;
-      color: white;
-      text-decoration: none;
-      border-radius: 4px;
-      font-weight: bold;
-    }
-    .btn:hover {
-      background-color: #0369a1;
-    }
-  </style>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>500 — Server Error</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Inter', system-ui, sans-serif;
+        background: #0d1117; color: #e6edf3;
+        min-height: 100vh; display: flex;
+        align-items: center; justify-content: center;
+        padding: 24px; -webkit-font-smoothing: antialiased;
+      }
+      .wrap { text-align: center; max-width: 420px; }
+      .code {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 6rem; font-weight: 500; line-height: 1;
+        color: #21262d; letter-spacing: -4px;
+        margin-bottom: 24px; user-select: none;
+      }
+      h1 { font-size: 1.3rem; font-weight: 600; margin-bottom: 10px; }
+      p { font-size: 0.9rem; color: #8b949e; margin-bottom: 28px; line-height: 1.6; }
+      .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+      .btn {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 8px 18px; border-radius: 8px;
+        font-size: 0.875rem; font-weight: 500;
+        text-decoration: none; transition: all .18s;
+        font-family: inherit;
+      }
+      .btn-primary {
+        background: #1f6feb; color: #fff;
+        border: 1px solid rgba(88,166,255,.2);
+      }
+      .btn-primary:hover { background: #388bfd; }
+      .btn-ghost {
+        background: transparent; color: #8b949e;
+        border: 1px solid #30363d;
+      }
+      .btn-ghost:hover { background: #161b22; color: #e6edf3; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="code">500</div>
+      <h1>Something went wrong</h1>
+      <p>
+        An unexpected error occurred on the server. The issue has been noted.
+        Please try again in a moment or return to the home page.
+      </p>
+      <div class="actions">
+        <a href="/" class="btn btn-primary">Back to home</a>
+        <a href="javascript:history.back()" class="btn btn-ghost">Go back</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,107 +1,70 @@
-# Contributing to Sinatra URL Shortener
+# Contributing
 
-Thank you for your interest in contributing! This document provides guidelines and instructions for contributing to the project.
+Thanks for taking the time to contribute. Here's everything you need to get started.
 
-## Code of Conduct
+## Setting up
 
-Please be respectful and constructive in all interactions. We're committed to providing a welcoming and inclusive environment for all contributors.
+```bash
+git clone https://github.com/hamdyelbatal122/Sinatra.git
+cd Sinatra
+bundle install
+cp .env.example .env
+ruby db/seeds.rb
+bundle exec rackup -p 4567
+```
 
-## Getting Started
+## Workflow
 
-1. Fork the repository
-2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/Sinatra.git`
-3. Create a feature branch: `git checkout -b feature/your-feature-name`
-4. Set up your environment:
+1. Fork the repo and create a branch from `master`
+
    ```bash
-   bundle install
-   cp .env.example .env
-   # Edit .env with your configuration
+   git checkout -b feat/my-feature
    ```
 
-## Development Workflow
+2. Make your changes, keeping commits focused and atomic
 
-### Running the Application
+3. Add or update tests for anything behaviour-related
 
-```bash
-bundle exec rackup
+4. Run the suite before pushing
+
+   ```bash
+   bundle exec rspec
+   ```
+
+5. Open a Pull Request — the template will guide you through the description
+
+## Commit style
+
+Use the conventional commit format:
+
+```
+feat: add QR code download button
+fix: correct hit counter race condition
+docs: update OAuth setup steps
+test: add spec for link URL validation
+refactor: simplify rate limit store
 ```
 
-The application will be available at `http://localhost:4567`.
+## Code style
 
-### Running Tests
+- 2-space indentation, no trailing whitespace
+- Keep methods short and single-purpose
+- Avoid comments that just restate what the code does
+- Prefer explicit over clever
 
-```bash
-bundle exec rspec
-```
+## Tests
 
-### Database Migrations
+- Write RSpec examples for all new behaviour
+- Keep unit and integration specs separate (`spec/` mirrors `app/` layout)
+- Aim for tests that describe intent, not implementation
 
-Migrations run automatically on application startup. To seed test data:
+## Reporting a bug
 
-```bash
-ruby db/seeds.rb
-```
+Use the [bug report template](.github/ISSUE_TEMPLATE/bug_report.md). Include:
+- Exact steps to reproduce
+- What you expected vs what happened
+- Your Ruby version and OS
 
-## Making Changes
+## Questions
 
-1. Create a feature branch from `master`
-2. Make your changes with clear, descriptive commits
-3. Add tests for new functionality
-4. Ensure all tests pass: `bundle exec rspec`
-5. Update documentation as needed
-
-## Commit Messages
-
-Use clear, descriptive commit messages:
-
-- `feat: add OAuth login support`
-- `fix: resolve email notification bug`
-- `docs: update API documentation`
-- `test: add integration tests for links`
-- `refactor: simplify authentication logic`
-
-## Pull Request Process
-
-1. Update the README.md with any new features or changes
-2. Ensure all tests pass
-3. Provide a clear description of your changes
-4. Reference any related issues
-5. Request review from maintainers
-
-## Code Style
-
-- Follow Ruby conventions and best practices
-- Use meaningful variable and method names
-- Keep methods focused and single-purpose
-- Add comments only for non-obvious logic
-- Maintain consistent indentation (2 spaces)
-
-## Testing
-
-- Write tests for all new features
-- Ensure existing tests continue to pass
-- Aim for good test coverage
-- Use descriptive test names
-
-## Documentation
-
-- Update README.md for user-facing changes
-- Add inline comments for complex logic
-- Document API changes in the OpenAPI spec
-- Update .env.example for new environment variables
-
-## Reporting Issues
-
-When reporting bugs, please include:
-
-- Clear description of the issue
-- Steps to reproduce
-- Expected behavior
-- Actual behavior
-- Environment details (Ruby version, OS, etc.)
-
-## Questions?
-
-Feel free to open an issue or discussion for questions about contributing.
-
-Thank you for helping make this project better!
+Open a [GitHub Discussion](https://github.com/hamdyelbatal122/Sinatra/discussions) rather than an issue for questions.

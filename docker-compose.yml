@@ -1,24 +1,38 @@
-version: '3.8'
-
 services:
   app:
-    build: .
+    build:
+      context: .
+      target: runtime
     ports:
       - "4567:4567"
     environment:
       RACK_ENV: development
       DATABASE_URL: sqlite:///app/db/development.sqlite3
-      SESSION_SECRET: dev-secret-key
+      SESSION_SECRET: dev-secret-change-me
       SMTP_HOST: mailhog
-      SMTP_PORT: 1025
+      SMTP_PORT: "1025"
+      MAIL_FROM: noreply@shortener.local
     volumes:
       - .:/app
+      - gems:/usr/local/bundle
     depends_on:
-      - mailhog
+      mailhog:
+        condition: service_started
     command: bundle exec rackup -p 4567 -o 0.0.0.0
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:4567/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
   mailhog:
     image: mailhog/mailhog:latest
     ports:
       - "1025:1025"
       - "8025:8025"
+    restart: unless-stopped
+
+volumes:
+  gems:

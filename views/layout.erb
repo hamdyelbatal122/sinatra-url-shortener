@@ -3,106 +3,503 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Go - URL Shortener</title>
-    <link rel="search" title="Go" href="/links/opensearch.xml" type="application/opensearchdescription+xml"/>
+    <title>Go — URL Shortener</title>
+    <meta name="description" content="A fast, self-hosted URL shortener with analytics, OAuth, and team roles.">
+    <link rel="search" title="Go" href="/links/opensearch.xml" type="application/opensearchdescription+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+      /* ── Design tokens ─────────────────────────────────────────── */
       :root {
-        --primary: #007bff;
-        --primary-dark: #0056b3;
-        --danger: #c00;
-        --bg: #f8f9fa;
-        --card: #fff;
-        --border: #e0e0e0;
-        --radius: 10px;
+        --bg:          #0d1117;
+        --surface:     #161b22;
+        --surface-2:   #1c2333;
+        --border:      #30363d;
+        --border-muted:#21262d;
+        --text:        #e6edf3;
+        --text-muted:  #8b949e;
+        --text-subtle: #6e7681;
+        --accent:      #58a6ff;
+        --accent-dark: #1f6feb;
+        --success:     #3fb950;
+        --danger:      #f85149;
+        --warning:     #d29922;
+        --tag-bg:      rgba(56,139,253,.15);
+        --tag-text:    #79c0ff;
+        --cat-bg:      rgba(63,185,80,.15);
+        --cat-text:    #56d364;
+        --radius:      8px;
+        --radius-lg:   12px;
+        --shadow:      0 8px 32px rgba(1,4,9,.6);
+        --transition:  0.18s ease;
       }
-      html { box-sizing: border-box; }
-      *, *:before, *:after { box-sizing: inherit; }
+
+      /* ── Reset ─────────────────────────────────────────────────── */
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
       body {
-        font: 16px 'Inter', 'Helvetica Neue', Helvetica, Arial, Geneva, sans-serif;
+        font-family: 'Inter', system-ui, sans-serif;
         background: var(--bg);
-        color: #222;
-        margin: 0;
+        color: var(--text);
         min-height: 100vh;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
       }
-      .container {
-        max-width: 700px;
-        margin: 40px auto;
-        background: var(--card);
-        border-radius: var(--radius);
-        box-shadow: 0 2px 16px #e0e0e0;
-        padding: 36px 28px 28px 28px;
+
+      /* ── Layout ────────────────────────────────────────────────── */
+      .page-wrapper {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
       }
-      h1, h2 { font-weight: 700; margin-bottom: 0.5em; }
-      a {
-        color: var(--primary);
-        text-decoration: none;
-        border-bottom: 1px solid #cce;
-        transition: color 0.2s;
+
+      /* ── Navigation ────────────────────────────────────────────── */
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(13,17,23,.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-muted);
+        padding: 0 24px;
       }
-      a:hover { text-decoration: underline; color: var(--primary-dark); }
-      .actions { float: right; }
-      .hits { color: #888; font-size: 0.95em; }
-      .remove { color: var(--danger); margin-left: 8px; }
-      form { margin-bottom: 1.5em; }
-      input[type="text"], input[type="url"], input[type="password"] {
-        width: 40%;
-        padding: 8px;
-        margin-right: 8px;
-        border: 1px solid #bbb;
-        border-radius: 4px;
-        font-size: 1em;
-        background: #fafbfc;
-        transition: border 0.2s;
-      }
-      input:focus { border: 1.5px solid var(--primary); outline: none; }
-      button {
-        padding: 8px 20px;
-        border: none;
-        background: var(--primary);
-        color: #fff;
-        border-radius: 4px;
-        font-size: 1em;
-        cursor: pointer;
-        transition: background 0.2s;
-      }
-      button:hover { background: var(--primary-dark); }
-      ul { list-style: none; padding: 0; }
-      li {
-        padding: 10px 0;
-        border-bottom: 1px solid var(--border);
+      .navbar-inner {
+        max-width: 960px;
+        margin: 0 auto;
+        height: 56px;
         display: flex;
         align-items: center;
-        gap: 1em;
+        gap: 16px;
       }
-      .name { width: 120px; font-weight: bold; }
-      .url { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-      .admin-bar {
-        margin-bottom: 1em;
-        text-align: right;
-        font-size: 1em;
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: var(--text);
+        font-weight: 700;
+        font-size: 1.1rem;
+        letter-spacing: -0.3px;
       }
-      @media (max-width: 600px) {
-        .container { padding: 12px 2vw; }
-        .name { width: 80px; }
-        input[type="text"], input[type="url"], input[type="password"] { width: 90%; margin-bottom: 8px; }
-        li { flex-direction: column; align-items: flex-start; gap: 0.2em; }
+      .navbar-brand .logo-mark {
+        width: 30px;
+        height: 30px;
+        background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #fff;
+        flex-shrink: 0;
       }
-      .qr svg { height: 32px; width: 32px; margin-left: 8px; vertical-align: middle; }
+      .navbar-spacer { flex: 1; }
+      .navbar-nav {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        list-style: none;
+      }
+      .navbar-nav a, .navbar-nav button {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: var(--radius);
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-decoration: none;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        transition: color var(--transition), background var(--transition);
+        font-family: inherit;
+      }
+      .navbar-nav a:hover, .navbar-nav button:hover {
+        color: var(--text);
+        background: var(--surface-2);
+      }
+      .navbar-nav .nav-badge {
+        font-size: 0.7rem;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 1px 5px;
+        color: var(--text-subtle);
+      }
+      .btn-primary {
+        background: var(--accent-dark) !important;
+        color: #fff !important;
+        border: 1px solid rgba(88,166,255,.2) !important;
+      }
+      .btn-primary:hover {
+        background: var(--accent) !important;
+        color: #0d1117 !important;
+      }
+      .user-chip {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 10px;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+      .user-chip .avatar {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .role-tag {
+        font-size: 0.68rem;
+        padding: 1px 6px;
+        border-radius: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+      }
+      .role-admin  { background: rgba(248,81,73,.15); color: #f85149; }
+      .role-editor { background: rgba(210,153,34,.15); color: #d29922; }
+      .role-reader { background: rgba(63,185,80,.15);  color: #3fb950; }
+
+      /* ── Main container ────────────────────────────────────────── */
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 32px 24px 64px;
+        flex: 1;
+      }
+
+      /* ── Flash messages ────────────────────────────────────────── */
+      .flash {
+        padding: 12px 16px;
+        border-radius: var(--radius);
+        border-left: 3px solid;
+        margin-bottom: 20px;
+        font-size: 0.875rem;
+      }
+      .flash-error   { background: rgba(248,81,73,.1);  border-color: var(--danger);  color: #ffa198; }
+      .flash-success { background: rgba(63,185,80,.1);  border-color: var(--success); color: #56d364; }
+      .flash-info    { background: rgba(88,166,255,.1); border-color: var(--accent);  color: #79c0ff; }
+
+      /* ── Cards ─────────────────────────────────────────────────── */
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+      }
+      .card-header {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border-muted);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .card-header h2 {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+      }
+      .card-body { padding: 20px; }
+
+      /* ── Form elements ─────────────────────────────────────────── */
+      .form-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        flex: 1;
+        min-width: 160px;
+      }
+      label {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--text-muted);
+      }
+      input[type="text"],
+      input[type="url"],
+      input[type="email"],
+      input[type="password"],
+      select {
+        width: 100%;
+        padding: 9px 12px;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--text);
+        font-size: 0.875rem;
+        font-family: inherit;
+        transition: border-color var(--transition), box-shadow var(--transition);
+        outline: none;
+      }
+      input:focus, select:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(88,166,255,.12);
+      }
+      input::placeholder { color: var(--text-subtle); }
+      input[type="checkbox"] {
+        accent-color: var(--accent);
+        width: 15px;
+        height: 15px;
+        cursor: pointer;
+      }
+
+      /* ── Buttons ───────────────────────────────────────────────── */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        border-radius: var(--radius);
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition: all var(--transition);
+        font-family: inherit;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .btn-sm { padding: 5px 10px; font-size: 0.8rem; }
+      .btn-blue {
+        background: var(--accent-dark);
+        color: #fff;
+        border-color: rgba(88,166,255,.2);
+      }
+      .btn-blue:hover { background: #388bfd; box-shadow: 0 0 0 3px rgba(88,166,255,.2); }
+      .btn-ghost {
+        background: transparent;
+        color: var(--text-muted);
+        border-color: var(--border);
+      }
+      .btn-ghost:hover { background: var(--surface-2); color: var(--text); }
+      .btn-danger {
+        background: transparent;
+        color: var(--danger);
+        border-color: rgba(248,81,73,.3);
+      }
+      .btn-danger:hover { background: rgba(248,81,73,.1); }
+
+      /* ── Tables ────────────────────────────────────────────────── */
+      .table-wrap { overflow-x: auto; }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.875rem;
+      }
+      thead th {
+        text-align: left;
+        padding: 10px 14px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--text-subtle);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-bottom: 1px solid var(--border);
+      }
+      tbody tr {
+        border-bottom: 1px solid var(--border-muted);
+        transition: background var(--transition);
+      }
+      tbody tr:last-child { border-bottom: none; }
+      tbody tr:hover { background: rgba(255,255,255,.02); }
+      td { padding: 11px 14px; color: var(--text); vertical-align: middle; }
+
+      /* ── Tags & badges ─────────────────────────────────────────── */
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 2px 8px;
+        border-radius: 20px;
+        font-size: 0.72rem;
+        font-weight: 500;
+      }
+      .tag-blue    { background: var(--tag-bg);  color: var(--tag-text); }
+      .tag-green   { background: var(--cat-bg);  color: var(--cat-text); }
+      .tag-neutral { background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
+
+      .hits-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.78rem;
+        color: var(--text-subtle);
+        font-variant-numeric: tabular-nums;
+      }
+      .hits-badge svg { opacity: .6; }
+
+      /* ── Code / mono ───────────────────────────────────────────── */
+      .mono {
+        font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+        font-size: 0.82rem;
+      }
+      .link-name {
+        color: var(--accent);
+        font-weight: 600;
+        text-decoration: none;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .link-name:hover { text-decoration: underline; }
+      .link-url {
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        max-width: 320px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: block;
+      }
+
+      /* ── Section headings ──────────────────────────────────────── */
+      .section-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text);
+        letter-spacing: -0.4px;
+        margin-bottom: 4px;
+      }
+      .section-subtitle {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        margin-bottom: 24px;
+      }
+
+      /* ── Stat cards ────────────────────────────────────────────── */
+      .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .stat-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 18px 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+      }
+      .stat-card.blue::before  { background: linear-gradient(90deg, var(--accent-dark), var(--accent)); }
+      .stat-card.green::before { background: linear-gradient(90deg, #1a7f37, var(--success)); }
+      .stat-card.orange::before { background: linear-gradient(90deg, #9e6a03, var(--warning)); }
+      .stat-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--text-subtle);
+        margin-bottom: 6px;
+      }
+      .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text);
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: -1px;
+      }
+
+      /* ── Empty state ───────────────────────────────────────────── */
+      .empty-state {
+        text-align: center;
+        padding: 48px 24px;
+        color: var(--text-subtle);
+      }
+      .empty-state svg { margin-bottom: 12px; opacity: .4; }
+      .empty-state p { font-size: 0.9rem; }
+
+      /* ── Footer ────────────────────────────────────────────────── */
+      .footer {
+        border-top: 1px solid var(--border-muted);
+        padding: 16px 24px;
+        text-align: center;
+        font-size: 0.78rem;
+        color: var(--text-subtle);
+      }
+      .footer a { color: var(--text-muted); text-decoration: none; }
+      .footer a:hover { color: var(--text); }
+
+      /* ── Responsive ────────────────────────────────────────────── */
+      @media (max-width: 680px) {
+        .navbar-inner { padding: 0; }
+        .container { padding: 20px 16px 48px; }
+        .form-row { flex-direction: column; }
+        .user-chip .role-tag { display: none; }
+        .link-url { max-width: 160px; }
+        thead th:nth-child(3),
+        td:nth-child(3) { display: none; }
+      }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="admin-bar">
-        <% if logged_in? %>
-          Logged in as <%= current_user.username %> (<%= current_user.role %>) |
-          <% if can_manage_links? %><a href="/dashboard">Dashboard</a> |<% end %>
-          <a href="/settings">Settings</a> |
-          <a href="/logout">Logout</a>
-        <% else %>
-          <a href="/login">Login</a>
-        <% end %>
-      </div>
-      <%= yield %>
+    <div class="page-wrapper">
+      <!-- Navigation -->
+      <nav class="navbar">
+        <div class="navbar-inner">
+          <a href="/" class="navbar-brand">
+            <div class="logo-mark">Go</div>
+            <span>Shortener</span>
+          </a>
+          <div class="navbar-spacer"></div>
+          <ul class="navbar-nav">
+            <% if logged_in? %>
+              <li>
+                <div class="user-chip">
+                  <div class="avatar"><%= current_user.username.to_s[0].upcase %></div>
+                  <span><%= current_user.username %></span>
+                  <span class="role-tag role-<%= current_user.role %>"><%= current_user.role %></span>
+                </div>
+              </li>
+              <% if can_manage_links? %>
+                <li><a href="/dashboard">Dashboard</a></li>
+              <% end %>
+              <li><a href="/settings">Settings</a></li>
+              <li><a href="/logout">Sign out</a></li>
+            <% else %>
+              <li><a href="/login" class="btn btn-primary">Sign in</a></li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Content -->
+      <main class="container">
+        <%= yield %>
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <a href="https://github.com/hamdyelbatal122/Sinatra">Sinatra URL Shortener</a>
+        &nbsp;·&nbsp; Built with Ruby &amp; Sinatra
+        &nbsp;·&nbsp; <a href="/api/links">API</a>
+      </footer>
     </div>
   </body>
 </html>

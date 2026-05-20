@@ -1,64 +1,187 @@
-<div class="login-container">
-  <h1>Login</h1>
-  <% if @error %><p style="color:red"><%= @error %></p><% end %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in — Go URL Shortener</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg:       #0d1117;
+        --surface:  #161b22;
+        --border:   #30363d;
+        --text:     #e6edf3;
+        --muted:    #8b949e;
+        --subtle:   #6e7681;
+        --accent:   #58a6ff;
+        --accent-d: #1f6feb;
+        --danger:   #f85149;
+        --radius:   8px;
+      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Inter', system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        -webkit-font-smoothing: antialiased;
+      }
+      .login-wrap {
+        width: 100%;
+        max-width: 360px;
+      }
+      .login-brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 28px;
+        text-decoration: none;
+        color: var(--text);
+      }
+      .logo-mark {
+        width: 36px; height: 36px;
+        background: linear-gradient(135deg, var(--accent-d), var(--accent));
+        border-radius: 10px;
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 700; font-size: 1rem; color: #fff;
+      }
+      .login-brand span { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.3px; }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 28px;
+      }
+      h1 {
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: var(--text);
+      }
+      .alert-error {
+        background: rgba(248,81,73,.1);
+        border: 1px solid rgba(248,81,73,.3);
+        border-radius: var(--radius);
+        padding: 10px 14px;
+        color: #ffa198;
+        font-size: 0.85rem;
+        margin-bottom: 18px;
+      }
+      .form-group { margin-bottom: 14px; }
+      label { display: block; font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom: 5px; }
+      input[type="text"],
+      input[type="password"] {
+        width: 100%; padding: 9px 12px;
+        background: #0d1117; border: 1px solid var(--border);
+        border-radius: var(--radius); color: var(--text);
+        font-size: 0.875rem; font-family: inherit; outline: none;
+        transition: border-color .18s, box-shadow .18s;
+      }
+      input:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(88,166,255,.12);
+      }
+      input::placeholder { color: var(--subtle); }
+      .btn-submit {
+        width: 100%; padding: 9px;
+        background: var(--accent-d); color: #fff;
+        border: 1px solid rgba(88,166,255,.2);
+        border-radius: var(--radius); font-size: 0.875rem;
+        font-weight: 600; font-family: inherit;
+        cursor: pointer; transition: background .18s;
+        margin-top: 6px;
+      }
+      .btn-submit:hover { background: #388bfd; }
+      .divider {
+        display: flex; align-items: center; gap: 12px;
+        margin: 20px 0; color: var(--subtle); font-size: 0.8rem;
+      }
+      .divider::before, .divider::after {
+        content: ''; flex: 1;
+        height: 1px; background: var(--border);
+      }
+      .oauth-btn {
+        display: flex; align-items: center; justify-content: center;
+        gap: 10px; width: 100%; padding: 9px 14px;
+        background: transparent; border: 1px solid var(--border);
+        border-radius: var(--radius); color: var(--text);
+        font-size: 0.875rem; font-weight: 500; font-family: inherit;
+        text-decoration: none; cursor: pointer;
+        transition: background .18s, border-color .18s;
+        margin-bottom: 10px;
+      }
+      .oauth-btn:hover { background: rgba(255,255,255,.05); border-color: var(--muted); }
+      .oauth-btn svg { flex-shrink: 0; }
+      .back-link {
+        text-align: center; margin-top: 18px;
+        font-size: 0.8rem; color: var(--subtle);
+      }
+      .back-link a { color: var(--accent); text-decoration: none; }
+      .back-link a:hover { text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <div class="login-wrap">
+      <a href="/" class="login-brand">
+        <div class="logo-mark">Go</div>
+        <span>Shortener</span>
+      </a>
 
-  <div class="login-form">
-    <h3>Traditional Login</h3>
-    <form method="post" action="/login">
-      <input type="text" name="username" placeholder="Username" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <button type="submit">Login</button>
-    </form>
-  </div>
+      <div class="card">
+        <h1>Sign in to your account</h1>
 
-  <div class="oauth-section">
-    <h3>Or login with</h3>
-    <div class="oauth-buttons">
-      <% if ENV['GOOGLE_CLIENT_ID'] %>
-        <a href="/auth/google_oauth2" class="oauth-btn google">
-          <span>Login with Google</span>
-        </a>
-      <% end %>
-      <% if ENV['GITHUB_CLIENT_ID'] %>
-        <a href="/auth/github" class="oauth-btn github">
-          <span>Login with GitHub</span>
-        </a>
-      <% end %>
+        <% if @error %>
+          <div class="alert-error"><%= @error %></div>
+        <% end %>
+
+        <form method="post" action="/login" id="login-form">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="admin" required autocomplete="username">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn-submit">Sign in</button>
+        </form>
+
+        <% if ENV['GOOGLE_CLIENT_ID'] || ENV['GITHUB_CLIENT_ID'] %>
+          <div class="divider">or continue with</div>
+
+          <% if ENV['GOOGLE_CLIENT_ID'] %>
+            <a href="/auth/google_oauth2" class="oauth-btn" id="google-oauth-btn">
+              <!-- Google G logo -->
+              <svg width="18" height="18" viewBox="0 0 18 18">
+                <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.25-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/>
+                <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/>
+                <path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/>
+                <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/>
+              </svg>
+              Continue with Google
+            </a>
+          <% end %>
+
+          <% if ENV['GITHUB_CLIENT_ID'] %>
+            <a href="/auth/github" class="oauth-btn" id="github-oauth-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23A11.51 11.51 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.29-1.552 3.297-1.23 3.297-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.298 24 12c0-6.627-5.373-12-12-12"/>
+              </svg>
+              Continue with GitHub
+            </a>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="back-link">
+        <a href="/">&larr; Back to link list</a>
+      </div>
     </div>
-  </div>
-
-  <style>
-    .login-container {
-      max-width: 400px;
-      margin: 50px auto;
-      padding: 20px;
-    }
-    .login-form, .oauth-section {
-      margin: 20px 0;
-    }
-    .oauth-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .oauth-btn {
-      display: block;
-      padding: 10px;
-      text-align: center;
-      border-radius: 4px;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      transition: opacity 0.3s;
-    }
-    .oauth-btn:hover {
-      opacity: 0.9;
-    }
-    .oauth-btn.google {
-      background-color: #4285F4;
-    }
-    .oauth-btn.github {
-      background-color: #333;
-    }
-  </style>
-</div>
+  </body>
+</html>

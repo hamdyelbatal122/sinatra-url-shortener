@@ -1,77 +1,178 @@
-
-<h1>Admin Dashboard</h1>
-<div style="display: flex; gap: 2em; flex-wrap: wrap;">
-  <div style="flex:1; min-width: 220px;">
-    <h2>Stats</h2>
-    <p><strong>Total links:</strong> <%= @total_links %></p>
-    <p><strong>Total hits:</strong> <%= @total_hits %></p>
+<div style="margin-bottom: 28px; display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+  <div>
+    <h1 class="section-title">Dashboard</h1>
+    <p class="section-subtitle">Overview of link activity and system events.</p>
   </div>
-  <div style="flex:2; min-width: 320px;">
+  <a href="/" class="btn btn-ghost btn-sm">← All links</a>
+</div>
+
+<!-- Stats -->
+<div class="stat-grid">
+  <div class="stat-card blue">
+    <div class="stat-label">Total Links</div>
+    <div class="stat-value"><%= @total_links %></div>
+  </div>
+  <div class="stat-card green">
+    <div class="stat-label">Total Hits</div>
+    <div class="stat-value"><%= (@total_hits || 0).to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse %></div>
+  </div>
+  <div class="stat-card orange">
+    <div class="stat-label">Top Link Hits</div>
+    <div class="stat-value"><%= @top_links.first ? @top_links.first.hits : 0 %></div>
+  </div>
+</div>
+
+<!-- Search & filter -->
+<div class="card" style="margin-bottom:20px;">
+  <div class="card-header">
     <h2>Search & Filter</h2>
-    <form method="get" action="/dashboard">
-      <input type="text" name="q" value="<%= @search_query %>" placeholder="Search by name or URL" style="width:60%">
-      <input type="text" name="category" value="<%= @category_query %>" placeholder="Category">
-      <input type="text" name="tag" value="<%= @tag_query %>" placeholder="Tag">
-      <button>Search</button>
+  </div>
+  <div class="card-body">
+    <form method="get" action="/dashboard" id="dashboard-search-form">
+      <div class="form-row" style="align-items:flex-end;">
+        <div class="form-group">
+          <label for="d-q">Name or URL</label>
+          <input type="text" id="d-q" name="q" value="<%= h(@search_query.to_s) %>" placeholder="Search…">
+        </div>
+        <div class="form-group" style="max-width:160px;">
+          <label for="d-cat">Category</label>
+          <input type="text" id="d-cat" name="category" value="<%= h(@category_query.to_s) %>" placeholder="Any category">
+        </div>
+        <div class="form-group" style="max-width:160px;">
+          <label for="d-tag">Tag</label>
+          <input type="text" id="d-tag" name="tag" value="<%= h(@tag_query.to_s) %>" placeholder="Any tag">
+        </div>
+        <div style="flex-shrink:0;">
+          <button type="submit" class="btn btn-ghost">Apply</button>
+        </div>
+      </div>
     </form>
+
     <% if @filtered_links && !@filtered_links.empty? %>
-      <ul>
-        <% @filtered_links.each do |link| %>
-          <li>
-            <a href="/<%= link.name %>"><%= link.name %></a> - <%= link.url %> (<%= link.hits %> hits)
-          </li>
-        <% end %>
-      </ul>
-    <% elsif @search_query && @search_query != '' %>
-      <p>No results found.</p>
+      <div class="table-wrap" style="margin-top:16px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>URL</th>
+              <th>Hits</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @filtered_links.each do |link| %>
+              <tr>
+                <td><a href="/<%= link.name %>" class="link-name">/<%= link.name %></a></td>
+                <td><span class="link-url" title="<%= link.url %>"><%= link.url %></span></td>
+                <td><span class="hits-badge"><%= link.hits %></span></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% elsif @search_query.to_s != '' || @category_query.to_s != '' || @tag_query.to_s != '' %>
+      <p style="margin-top:14px; color: var(--text-subtle); font-size:0.875rem;">No results match your filters.</p>
     <% end %>
   </div>
 </div>
 
-<div style="margin-top:2em;">
-  <h2>Top 10 Links</h2>
-  <ul>
-    <% @top_links.each do |link| %>
-      <li>
-        <a href="/<%= link.name %>"><%= link.name %></a> - <%= link.url %> (<%= link.hits %> hits)
-      </li>
-    <% end %>
-  </ul>
+<!-- Top links & recent side by side -->
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:20px;">
+  <div class="card">
+    <div class="card-header"><h2>Top 10 by Hits</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Name</th><th style="text-align:right;">Hits</th></tr></thead>
+        <tbody>
+          <% @top_links.each_with_index do |link, i| %>
+            <tr>
+              <td>
+                <span style="color:var(--text-subtle);font-size:.75rem;margin-right:6px;"><%= i+1 %>.</span>
+                <a href="/<%= link.name %>" class="link-name">/<%= link.name %></a>
+              </td>
+              <td style="text-align:right;"><span class="hits-badge"><%= link.hits %></span></td>
+            </tr>
+          <% end %>
+          <% if @top_links.empty? %>
+            <tr><td colspan="2" style="color:var(--text-subtle);text-align:center;padding:20px;">No data yet</td></tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><h2>Recently Added</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Name</th><th style="text-align:right;">Date</th></tr></thead>
+        <tbody>
+          <% @recent_links.each do |link| %>
+            <tr>
+              <td><a href="/<%= link.name %>" class="link-name">/<%= link.name %></a></td>
+              <td style="text-align:right;font-size:0.78rem;color:var(--text-subtle);">
+                <%= link.created_at ? link.created_at.strftime('%b %-d, %Y') : '—' %>
+              </td>
+            </tr>
+          <% end %>
+          <% if @recent_links.empty? %>
+            <tr><td colspan="2" style="color:var(--text-subtle);text-align:center;padding:20px;">No links yet</td></tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
-<div style="margin-top:2em;">
-  <h2>Recently Added</h2>
-  <ul>
-    <% @recent_links.each do |link| %>
-      <li>
-        <a href="/<%= link.name %>"><%= link.name %></a> - <%= link.url %> (added <%= link.created_at.strftime('%Y-%m-%d') if link.created_at %>)
-      </li>
-    <% end %>
-  </ul>
-</div>
-
-<div style="margin-top:2em;">
-  <h2>Audit Log (last 20 actions)</h2>
-  <table style="width:100%;border-collapse:collapse;font-size:0.98em;">
-    <thead>
-      <tr style="background:#f5f5f5;">
-        <th style="text-align:left;padding:4px 8px;">Time</th>
-        <th style="text-align:left;padding:4px 8px;">User</th>
-        <th style="text-align:left;padding:4px 8px;">Action</th>
-        <th style="text-align:left;padding:4px 8px;">Entity</th>
-        <th style="text-align:left;padding:4px 8px;">Details</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @audit_logs.each do |log| %>
-        <tr style="border-bottom:1px solid #eee;">
-          <td style="padding:4px 8px;"><%= log.created_at.strftime('%Y-%m-%d %H:%M') if log.created_at %></td>
-          <td style="padding:4px 8px;"><%= log.user_id ? (User[log.user_id]&.username || 'User#'+log.user_id.to_s) : 'System' %></td>
-          <td style="padding:4px 8px;"><%= log.action %></td>
-          <td style="padding:4px 8px;"><%= log.entity_type %> #<%= log.entity_id %></td>
-          <td style="padding:4px 8px;"><%= log.details %></td>
+<!-- Audit log -->
+<div class="card">
+  <div class="card-header">
+    <h2>Audit Log</h2>
+    <span class="tag tag-neutral" style="margin-left:auto;">Last 20 events</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>User</th>
+          <th>Action</th>
+          <th>Entity</th>
+          <th>Details</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @audit_logs.each do |log| %>
+          <tr>
+            <td style="font-size:0.78rem;color:var(--text-subtle);white-space:nowrap;">
+              <%= log.created_at ? log.created_at.strftime('%b %-d %H:%M') : '—' %>
+            </td>
+            <td>
+              <% user = log.user_id ? User[log.user_id] : nil %>
+              <span style="font-size:0.82rem;"><%= user ? user.username : 'System' %></span>
+            </td>
+            <td>
+              <span class="tag <%= log.action == 'delete' ? 'tag-neutral' : 'tag-green' %>"><%= log.action %></span>
+            </td>
+            <td style="font-size:0.8rem;color:var(--text-muted);">
+              <%= log.entity_type %> <span style="color:var(--text-subtle);">#<%= log.entity_id %></span>
+            </td>
+            <td style="font-size:0.8rem;color:var(--text-muted);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+              <%= log.details %>
+            </td>
+          </tr>
+        <% end %>
+        <% if @audit_logs.empty? %>
+          <tr>
+            <td colspan="5" style="text-align:center;color:var(--text-subtle);padding:24px;">No audit events recorded.</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+<style>
+  @media (max-width: 640px) {
+    div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+  }
+</style>

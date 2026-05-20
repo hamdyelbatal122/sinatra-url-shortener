@@ -1,119 +1,133 @@
-<h1>Account Settings</h1>
+<div style="margin-bottom:28px;">
+  <h1 class="section-title">Account Settings</h1>
+  <p class="section-subtitle">Manage your profile, security, and notification preferences.</p>
+</div>
 
 <% if @error %>
-  <p style="color:#b42318;font-weight:600;"><%= @error %></p>
+  <div class="flash flash-error"><%= @error %></div>
 <% end %>
 <% if @success %>
-  <p style="color:#027a48;font-weight:600;"><%= @success %></p>
+  <div class="flash flash-success"><%= @success %></div>
 <% end %>
 
-<div class="settings-section">
-  <h2>Profile Information</h2>
-  <p><strong>Username:</strong> <%= current_user.username || 'N/A' %></p>
-  <p><strong>Email:</strong> <%= current_user.email || 'Not set' %></p>
-  <p><strong>Role:</strong> <%= current_user.role %></p>
-</div>
+<div style="display:grid; gap:16px; max-width:640px;">
 
-<% if current_user.password_hash %>
-  <div class="settings-section">
-    <h2>Change Password</h2>
-    <form method="post" action="/settings/password">
-      <input type="password" name="current_password" placeholder="Current password" required>
-      <input type="password" name="new_password" placeholder="New password (min 8 chars)" required>
-      <input type="password" name="confirm_password" placeholder="Confirm new password" required>
-      <button type="submit">Update Password</button>
-    </form>
+  <!-- Profile -->
+  <div class="card">
+    <div class="card-header"><h2>Profile</h2></div>
+    <div class="card-body">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div>
+          <div style="font-size:0.75rem;color:var(--text-subtle);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Username</div>
+          <div style="font-size:0.9rem;color:var(--text);" class="mono"><%= current_user.username || '—' %></div>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;color:var(--text-subtle);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Email</div>
+          <div style="font-size:0.9rem;color:var(--text-muted);"><%= current_user.email || 'Not set' %></div>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;color:var(--text-subtle);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Role</div>
+          <span class="role-tag role-<%= current_user.role %>"><%= current_user.role %></span>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;color:var(--text-subtle);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Member since</div>
+          <div style="font-size:0.9rem;color:var(--text-muted);">
+            <%= current_user.created_at ? current_user.created_at.strftime('%B %Y') : '—' %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-<% end %>
 
-<div class="settings-section">
-  <h2>Connected Accounts</h2>
-  <p>Connect your social accounts for easier login:</p>
-  <div class="oauth-connections">
-    <% if current_user.oauth_connected?('google_oauth2') %>
-      <div class="oauth-item connected">
-        <span>✓ Google</span>
-        <a href="/auth/disconnect/google_oauth2" class="btn-disconnect">Disconnect</a>
+  <!-- Change password -->
+  <% if current_user.password_hash %>
+    <div class="card">
+      <div class="card-header"><h2>Change Password</h2></div>
+      <div class="card-body">
+        <form method="post" action="/settings/password" id="password-form">
+          <div class="form-group" style="margin-bottom:12px;">
+            <label for="current-password">Current password</label>
+            <input type="password" id="current-password" name="current_password" required autocomplete="current-password">
+          </div>
+          <div class="form-group" style="margin-bottom:12px;">
+            <label for="new-password">New password <span style="color:var(--text-subtle);font-weight:400;">(min. 8 characters)</span></label>
+            <input type="password" id="new-password" name="new_password" required autocomplete="new-password" minlength="8">
+          </div>
+          <div class="form-group" style="margin-bottom:16px;">
+            <label for="confirm-password">Confirm new password</label>
+            <input type="password" id="confirm-password" name="confirm_password" required autocomplete="new-password">
+          </div>
+          <button type="submit" class="btn btn-blue btn-sm">Update password</button>
+        </form>
       </div>
-    <% else %>
-      <div class="oauth-item">
-        <a href="/auth/google_oauth2" class="btn-connect google">Connect Google</a>
-      </div>
-    <% end %>
+    </div>
+  <% end %>
 
-    <% if current_user.oauth_connected?('github') %>
-      <div class="oauth-item connected">
-        <span>✓ GitHub</span>
-        <a href="/auth/disconnect/github" class="btn-disconnect">Disconnect</a>
+  <!-- Connected accounts -->
+  <div class="card">
+    <div class="card-header"><h2>Connected Accounts</h2></div>
+    <div class="card-body" style="display:flex; flex-direction:column; gap:10px;">
+
+      <!-- Google -->
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.25-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/></svg>
+          <span style="font-size:0.875rem;font-weight:500;">Google</span>
+          <% if current_user.oauth_connected?('google_oauth2') %>
+            <span class="tag tag-green">Connected</span>
+          <% end %>
+        </div>
+        <% if current_user.oauth_connected?('google_oauth2') %>
+          <a href="/auth/disconnect/google_oauth2" class="btn btn-sm btn-danger">Disconnect</a>
+        <% elsif ENV['GOOGLE_CLIENT_ID'] %>
+          <a href="/auth/google_oauth2" class="btn btn-sm btn-ghost">Connect</a>
+        <% else %>
+          <span style="font-size:0.78rem;color:var(--text-subtle);">Not configured</span>
+        <% end %>
       </div>
-    <% else %>
-      <div class="oauth-item">
-        <a href="/auth/github" class="btn-connect github">Connect GitHub</a>
+
+      <!-- GitHub -->
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--text-muted)"><path d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.73.083-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23A11.51 11.51 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.29-1.552 3.297-1.23 3.297-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.298 24 12c0-6.627-5.373-12-12-12"/></svg>
+          <span style="font-size:0.875rem;font-weight:500;">GitHub</span>
+          <% if current_user.oauth_connected?('github') %>
+            <span class="tag tag-green">Connected</span>
+          <% end %>
+        </div>
+        <% if current_user.oauth_connected?('github') %>
+          <a href="/auth/disconnect/github" class="btn btn-sm btn-danger">Disconnect</a>
+        <% elsif ENV['GITHUB_CLIENT_ID'] %>
+          <a href="/auth/github" class="btn btn-sm btn-ghost">Connect</a>
+        <% else %>
+          <span style="font-size:0.78rem;color:var(--text-subtle);">Not configured</span>
+        <% end %>
       </div>
-    <% end %>
+
+    </div>
   </div>
-</div>
 
-<div class="settings-section">
-  <h2>Email Notifications</h2>
-  <form method="post" action="/settings/notifications">
-    <label>
-      <input type="checkbox" name="email_notifications_enabled" value="true"
-        <%= current_user.email_notifications_enabled? ? 'checked' : '' %>>
-      Enable email notifications for link events
-    </label>
-    <p style="font-size: 0.9em; color: #666;">
-      You'll receive notifications when links are created or deleted.
-    </p>
-    <button type="submit">Save Preferences</button>
-  </form>
-</div>
+  <!-- Notifications -->
+  <div class="card">
+    <div class="card-header"><h2>Email Notifications</h2></div>
+    <div class="card-body">
+      <form method="post" action="/settings/notifications" id="notifications-form">
+        <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;">
+          <input type="checkbox" name="email_notifications_enabled" value="true"
+            <%= current_user.email_notifications_enabled? ? 'checked' : '' %> style="margin-top:2px;">
+          <div>
+            <div style="font-size:0.875rem;font-weight:500;color:var(--text);">Enable email notifications</div>
+            <div style="font-size:0.8rem;color:var(--text-subtle);margin-top:2px;">
+              Receive an email when links are created or removed.
+              <% unless current_user.email %>
+                <span style="color:var(--warning);">Set an email address first.</span>
+              <% end %>
+            </div>
+          </div>
+        </label>
+        <button type="submit" class="btn btn-ghost btn-sm" style="margin-top:16px;">Save preferences</button>
+      </form>
+    </div>
+  </div>
 
-<style>
-  .settings-section {
-    margin: 30px 0;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  .oauth-connections {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 15px;
-  }
-  .oauth-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  .oauth-item.connected {
-    background-color: #f0f9ff;
-    border-color: #0284c7;
-  }
-  .btn-connect, .btn-disconnect {
-    padding: 8px 16px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-  }
-  .btn-connect {
-    background-color: #0284c7;
-    color: white;
-  }
-  .btn-connect.google {
-    background-color: #4285F4;
-  }
-  .btn-connect.github {
-    background-color: #333;
-  }
-  .btn-disconnect {
-    background-color: #dc2626;
-    color: white;
-  }
-</style>
+</div>

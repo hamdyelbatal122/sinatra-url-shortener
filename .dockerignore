@@ -1,19 +1,31 @@
-.git
+# Git
+.git/
 .gitignore
-.github
+
+# Environment — NEVER commit secrets
 .env
-.env.local
-.env.*.local
-tmp
-log
-db/test.sqlite3
-db/development.sqlite3
-spec
-.rspec_status
-*.md
-Gemfile.lock
-node_modules
+.env.*
+!.env.example
+
+# Development tools
+.claude/
+.github/
+.rubocop*
+
+# Test artifacts
+spec/
+tmp/
+coverage/
+
+# Logs
+*.log
+log/
+
+# SQLite dev databases (production uses a named volume)
+db/*.sqlite3
+db/*.sqlite3-*
+db/*.db
+
+# macOS noise
 .DS_Store
-.vscode
-.idea
-coverage
+**/.DS_Store
