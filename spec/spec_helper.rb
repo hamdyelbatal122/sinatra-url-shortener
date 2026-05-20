@@ -14,63 +14,7 @@ RSpec.configure do |config|
   config.include Rack::Test::Methods
 
   config.before(:suite) do
-    DB.drop_table?(:email_notifications)
-    DB.drop_table?(:oauth_providers)
-    DB.drop_table?(:audit_logs)
-    DB.drop_table?(:links)
-    DB.drop_table?(:users)
-
-    DB.create_table :users do
-      primary_key :id
-      String :username, unique: true, null: true
-      String :password_hash, null: true
-      String :email, unique: true, null: true
-      String :role, default: 'reader', null: false
-      Boolean :email_notifications_enabled, default: true
-      DateTime :created_at
-    end
-
-    DB.create_table :oauth_providers do
-      primary_key :id
-      Integer :user_id, null: false
-      String :provider, null: false
-      String :uid, null: false
-      String :email, null: true
-      String :name, null: true
-      DateTime :created_at
-      index [:provider, :uid], unique: true
-    end
-
-    DB.create_table :links do
-      primary_key :id
-      String :name, unique: true, null: false
-      String :url, null: false
-      String :category
-      String :tags
-      Integer :hits, default: 0
-      DateTime :created_at
-    end
-
-    DB.create_table :audit_logs do
-      primary_key :id
-      String :action, null: false
-      String :entity_type, null: false
-      Integer :entity_id, null: false
-      Integer :user_id
-      String :details
-      DateTime :created_at
-    end
-
-    DB.create_table :email_notifications do
-      primary_key :id
-      Integer :user_id, null: false
-      String :event_type, null: false
-      String :subject, null: false
-      String :body, null: false
-      String :status, default: 'pending', null: false
-      DateTime :sent_at, null: true
-      DateTime :created_at
-    end
+    # sinatra-sequel runs migrations automatically when models are loaded
   end
 
   config.before do
