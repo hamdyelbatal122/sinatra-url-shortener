@@ -1,7 +1,11 @@
 require 'sinatra'
-require 'sinatra/sequel'
+require 'sequel'
+require 'fileutils'
 require 'json'
 require 'bcrypt'
+
+FileUtils.mkdir_p('db')
+DB = Sequel.connect(ENV.fetch('DATABASE_URL', "sqlite://db/#{ENV.fetch('RACK_ENV', 'development')}.sqlite3"))
 require 'dotenv/load'
 require 'rack/protection'
 require 'rack/cors'

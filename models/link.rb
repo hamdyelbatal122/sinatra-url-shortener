@@ -1,19 +1,17 @@
 require 'sequel'
 
-migration 'create links' do
-  database.create_table? :links do
-    primary_key :id
-    String   :name, unique: true, null: false
-    String   :url, null: false, text: true
-    String   :category, null: true
-    String   :tags, null: true  # comma-separated
-    Integer  :hits, default: 0, null: false
-    DateTime :created_at, default: Sequel::CURRENT_TIMESTAMP
-    DateTime :updated_at, null: true
-    index :name
-    index :category
-    index :hits
-  end
+DB.create_table? :links do
+  primary_key :id
+  String   :name, unique: true, null: false
+  String   :url, null: false, text: true
+  String   :category, null: true
+  String   :tags, null: true  # comma-separated
+  Integer  :hits, default: 0, null: false
+  DateTime :created_at, default: Sequel::CURRENT_TIMESTAMP
+  DateTime :updated_at, null: true
+  index :name
+  index :category
+  index :hits
 end
 
 class Link < Sequel::Model

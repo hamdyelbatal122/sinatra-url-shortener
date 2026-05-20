@@ -4,7 +4,6 @@ ruby '>= 3.2'
 
 # Core framework
 gem 'sinatra', '~> 4.0'
-gem 'sinatra-sequel', '~> 0.9.0'
 gem 'puma', '~> 6.0'
 
 # Database

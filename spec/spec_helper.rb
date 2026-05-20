@@ -14,7 +14,7 @@ RSpec.configure do |config|
   config.include Rack::Test::Methods
 
   config.before(:suite) do
-    # sinatra-sequel runs migrations automatically when models are loaded
+    # DB is already configured in app.rb and tables are created when models are loaded
   end
 
   config.before do

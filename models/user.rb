@@ -1,18 +1,16 @@
 require 'sequel'
 
-migration 'create users' do
-  database.create_table? :users do
-    primary_key :id
-    String   :username, unique: true, null: true
-    String   :password_hash, null: true
-    String   :email, unique: true, null: true
-    String   :role, default: 'reader', null: false
-    TrueClass :email_notifications_enabled, default: true
-    DateTime :created_at, default: Sequel::CURRENT_TIMESTAMP
-    DateTime :updated_at, null: true
-    index :username
-    index :email
-  end
+DB.create_table? :users do
+  primary_key :id
+  String   :username, unique: true, null: true
+  String   :password_hash, null: true
+  String   :email, unique: true, null: true
+  String   :role, default: 'reader', null: false
+  TrueClass :email_notifications_enabled, default: true
+  DateTime :created_at, default: Sequel::CURRENT_TIMESTAMP
+  DateTime :updated_at, null: true
+  index :username
+  index :email
 end
 
 class User < Sequel::Model
