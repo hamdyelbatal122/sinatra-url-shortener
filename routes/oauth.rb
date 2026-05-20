@@ -30,7 +30,16 @@ get '/auth/:provider/callback' do
 
     user = User.first(email: email)
     unless user
+      base_username = name ? name.downcase.gsub(/[^a-z0-9]/, '') : email.split('@').first
+      username = base_username
+      counter = 1
+      while User.first(username: username)
+        username = "#{base_username}#{counter}"
+        counter += 1
+      end
+
       user = User.create(
+        username: username,
         email: email,
         role: 'editor',
         email_notifications_enabled: true

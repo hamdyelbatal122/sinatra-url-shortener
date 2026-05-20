@@ -148,7 +148,8 @@
             </td>
             <td>
               <% user = log.user_id ? User[log.user_id] : nil %>
-              <span style="font-size:0.82rem;"><%= user ? user.username : 'System' %></span>
+              <% display_name = user ? (user.username || user.email&.split('@')&.first || 'User') : 'System' %>
+              <span style="font-size:0.82rem;"><%= display_name %></span>
             </td>
             <td>
               <span class="tag <%= log.action == 'delete' ? 'tag-neutral' : 'tag-green' %>"><%= log.action %></span>

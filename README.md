@@ -77,6 +77,7 @@ docker build -t sinatra-shortener .
 docker run -p 4567:4567 \
   -e SESSION_SECRET=your-secret-key \
   -e RACK_ENV=production \
+  -v ./db:/app/db \
   sinatra-shortener
 ```
 
