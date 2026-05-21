@@ -118,6 +118,7 @@ end
 describe 'API Endpoints' do
   before do
     @user = create_user(role: 'admin')
+    login
     @link = Link.create(name: 'api-test', url: 'https://api.hamzi.dev', hits: 5)
   end
 
