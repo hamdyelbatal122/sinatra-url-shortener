@@ -1,0 +1,490 @@
+Test (Ruby 3.3)	Run tests	﻿2026-05-21T02:22:57.0321152Z ##[group]Run mkdir -p tmp
+Test (Ruby 3.3)	Run tests	2026-05-21T02:22:57.0321475Z ^[[36;1mmkdir -p tmp^[[0m
+Test (Ruby 3.3)	Run tests	2026-05-21T02:22:57.0322200Z ^[[36;1mbundle exec rspec --format progress --format RspecJunitFormatter --out tmp/rspec.xml^[[0m
+Test (Ruby 3.3)	Run tests	2026-05-21T02:22:57.0363441Z shell: /usr/bin/bash -e {0}
+Test (Ruby 3.3)	Run tests	2026-05-21T02:22:57.0363700Z env:
+Test (Ruby 3.3)	Run tests	2026-05-21T02:22:57.0363871Z   RACK_ENV: test
+Test (Ruby 3.3)	Run tests	2026-05-21T02:22:57.0364295Z   SESSION_SECRET: test-secret-for-ci-only-at-least-64-characters-long-to-satisfy-rack-session
+Test (Ruby 3.3)	Run tests	2026-05-21T02:22:57.0364772Z ##[endgroup]
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.5073206Z FFF.FF...FFF....FF...FFFFFF.FFFF..
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6049286Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6049853Z Failures:
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6050127Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6050322Z   1) Sinatra app loads homepage
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6050940Z      Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6061996Z        expected `#<Rack::MockResponse:0x00007f9e3a4ac268 @original_headers={"content-type"=>"text/html;charset=utf-8",...XKxrBaDoU9pbYEjGakmiB1LbizYOnOY%2BnctaIDAP"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6064040Z      # ./spec/app_spec.rb:13:in `block (2 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6064497Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6064696Z   2) Sinatra app requires login for settings page
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6065301Z      Failure/Error: expect(last_response.status).to eq(302)
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6065718Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6065844Z        expected: 302
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6066165Z             got: 404
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6066358Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6066498Z        (compared using ==)
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6067008Z      # ./spec/app_spec.rb:19:in `block (2 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6067466Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6067795Z   3) Sinatra app allows authenticated user to change password
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6068435Z      Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6069684Z        expected `#<Rack::MockResponse:0x00007f9e3b534e28 @original_headers={"content-type"=>"text/html;charset=utf-8",...yAI%2FZOIOsNPTR8BHpWGbKSNjCz5rpAqMLmduu5yR"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6070704Z      # ./spec/app_spec.rb:32:in `block (2 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6070949Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6071101Z   4) Sinatra app supports advanced search by category and tag
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6071446Z      Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6072667Z        expected `#<Rack::MockResponse:0x00007f9e3a4d10e0 @original_headers={"content-type"=>"text/html;charset=utf-8",...hxppj5B%2FjVcmY0cABYiuJ7To3TtMFx1IBHfDtLVo"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6073890Z      # ./spec/app_spec.rb:49:in `block (2 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6074144Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6074294Z   5) Authentication POST /login logs in with valid credentials
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6074647Z      Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6075585Z        expected `#<Rack::MockResponse:0x00007f9e3a565b50 @original_headers={"content-type"=>"text/html;charset=utf-8",...d2wAsxKkoC%2BAaZx4b7e2AaDu6h9aIrXg44K5mTHP"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6076585Z      # ./spec/integration_spec.rb:13:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6076872Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6076989Z   6) Links Management POST /links creates a new link
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6077317Z      Failure/Error: expect(last_response).to be_redirect
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6078281Z        expected `#<Rack::MockResponse:0x00007f9e3b11d3f8 @original_headers={"content-type"=>"text/html;charset=utf-8",...%2BC%2Bgt1ykTqs2whadVH9KdBpL14vnQrcU5IT9Xf"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.redirect?` to be truthy, got false
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6079305Z      # ./spec/integration_spec.rb:50:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6079576Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6079868Z   7) Links Management POST /links rejects invalid URL
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6080203Z      Failure/Error: expect(last_response.status).to eq(400)
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6080428Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6080500Z        expected: 400
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6080682Z             got: 500
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6080801Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6080881Z        (compared using ==)
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6081194Z      # ./spec/integration_spec.rb:57:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6081468Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6081813Z   8) Links Management POST /links rejects empty name
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6082186Z      Failure/Error: expect(last_response.status).to eq(400)
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6082427Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6082504Z        expected: 400
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6082684Z             got: 500
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6082798Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6082874Z        (compared using ==)
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6083190Z      # ./spec/integration_spec.rb:62:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6083478Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6083633Z   9) Links Management GET /links/:id/remove deletes link as admin
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6084078Z      Failure/Error: user = User.create(username: username, role: role, email: email)
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6084380Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6084488Z      Sequel::UniqueConstraintViolation:
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6084850Z        SQLite3::ConstraintException: UNIQUE constraint failed: users.email
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6085396Z      # ./vendor/bundle/ruby/3.3.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/resultset.rb:43:in `step'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6086028Z      # ./vendor/bundle/ruby/3.3.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/resultset.rb:43:in `next'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6086650Z      # ./vendor/bundle/ruby/3.3.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/resultset.rb:49:in `each'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6087296Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:428:in `block in fetch_rows'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6087945Z      # ./vendor/bundle/ruby/3.3.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/database.rb:356:in `query'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6088631Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:273:in `block (2 levels) in _execute'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6089331Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/database/logging.rb:38:in `log_connection_yield'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6089987Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:273:in `block in _execute'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6090621Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/connection_pool/timed_queue.rb:87:in `hold'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6091250Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/database/connecting.rb:283:in `synchronize'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6092218Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:266:in `_execute'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6092805Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:184:in `execute'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6093389Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/dataset/actions.rb:1263:in `execute'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6093977Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:421:in `fetch_rows'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6094580Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/dataset/actions.rb:1095:in `with_sql_each'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6095200Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/dataset/actions.rb:1103:in `with_sql_first'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6095843Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/adapters/shared/sqlite.rb:703:in `insert_select'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6096485Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1799:in `_insert_select_raw'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6097072Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1772:in `_insert'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6097687Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1844:in `block (2 levels) in _save'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6098456Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1084:in `around_create'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6099042Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1841:in `block in _save'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6099627Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1084:in `around_save'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6100184Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1836:in `_save'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6100786Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1550:in `block (2 levels) in save'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6101441Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/database/transactions.rb:264:in `_transaction'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6102391Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/database/transactions.rb:239:in `block in transaction'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6103073Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/connection_pool/timed_queue.rb:92:in `hold'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6103704Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/database/connecting.rb:283:in `synchronize'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6104340Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/database/transactions.rb:197:in `transaction'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6104969Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:2004:in `checked_transaction'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6105566Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1550:in `block in save'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6106177Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1990:in `checked_save_failure'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6106757Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1550:in `save'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6107283Z      # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:256:in `create'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6107708Z      # ./spec/spec_helper.rb:34:in `create_user'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6108082Z      # ./spec/integration_spec.rb:100:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6108456Z      # ------------------
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6108669Z      # --- Caused by: ---
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6108895Z      # SQLite3::ConstraintException:
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6109157Z      #   UNIQUE constraint failed: users.email
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6109616Z      #   ./vendor/bundle/ruby/3.3.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/resultset.rb:43:in `step'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6109990Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6110305Z   10) Links Management GET /links/:id/remove rejects deletion by non-admin
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6110782Z       Failure/Error: user = User.create(username: username, role: role, email: email)
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6111089Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6111188Z       Sequel::UniqueConstraintViolation:
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6111783Z         SQLite3::ConstraintException: UNIQUE constraint failed: users.email
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6112341Z       # ./vendor/bundle/ruby/3.3.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/resultset.rb:43:in `step'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6112962Z       # ./vendor/bundle/ruby/3.3.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/resultset.rb:43:in `next'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6113572Z       # ./vendor/bundle/ruby/3.3.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/resultset.rb:49:in `each'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6114220Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:428:in `block in fetch_rows'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6114893Z       # ./vendor/bundle/ruby/3.3.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/database.rb:356:in `query'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6115594Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:273:in `block (2 levels) in _execute'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6116300Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/database/logging.rb:38:in `log_connection_yield'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6117132Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:273:in `block in _execute'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6117770Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/connection_pool/timed_queue.rb:87:in `hold'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6118401Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/database/connecting.rb:283:in `synchronize'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6119015Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:266:in `_execute'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6119593Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:184:in `execute'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6120177Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/dataset/actions.rb:1263:in `execute'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6120771Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:421:in `fetch_rows'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6121396Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/dataset/actions.rb:1095:in `with_sql_each'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6122255Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/dataset/actions.rb:1103:in `with_sql_first'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6122929Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/adapters/shared/sqlite.rb:703:in `insert_select'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6123578Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1799:in `_insert_select_raw'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6124168Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1772:in `_insert'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6124785Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1844:in `block (2 levels) in _save'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6125415Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1084:in `around_create'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6126004Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1841:in `block in _save'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6126597Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1084:in `around_save'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6127158Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1836:in `_save'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6127757Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1550:in `block (2 levels) in save'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6128419Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/database/transactions.rb:264:in `_transaction'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6129112Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/database/transactions.rb:239:in `block in transaction'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6129967Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/connection_pool/timed_queue.rb:92:in `hold'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6130593Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/database/connecting.rb:283:in `synchronize'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6131243Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/database/transactions.rb:197:in `transaction'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6132085Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:2004:in `checked_transaction'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6132688Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1550:in `block in save'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6133299Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1990:in `checked_save_failure'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6133880Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1550:in `save'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6134428Z       # ./vendor/bundle/ruby/3.3.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:256:in `create'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6134852Z       # ./spec/spec_helper.rb:34:in `create_user'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6135226Z       # ./spec/integration_spec.rb:100:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6135587Z       # ------------------
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6135919Z       # --- Caused by: ---
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6136147Z       # SQLite3::ConstraintException:
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6136416Z       #   UNIQUE constraint failed: users.email
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6136875Z       #   ./vendor/bundle/ruby/3.3.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/resultset.rb:43:in `step'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6137244Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6137382Z   11) API Endpoints POST /api/links creates link as admin
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6137703Z       Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6138674Z         expected `#<Rack::MockResponse:0x00007f9e3a4d3660 @original_headers={"content-type"=>"application/json", "locat...FDET3uabgUVhFRSKYeTZdSrAqi%2BIL4h2g7zjwbrD"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6139745Z       # ./spec/integration_spec.rb:156:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6140033Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6140185Z   12) API Endpoints POST /api/links rejects creation by non-admin
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6140570Z       Failure/Error: expect(last_response.status).to eq(403)
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6140796Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6140868Z         expected: 403
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6141057Z              got: 302
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6141167Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6141251Z         (compared using ==)
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6141786Z       # ./spec/integration_spec.rb:165:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6142087Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6142234Z   13) API Endpoints DELETE /api/links/:id deletes link as admin
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6142580Z       Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6143529Z         expected `#<Rack::MockResponse:0x00007f9e3a568cb0 @original_headers={"content-type"=>"application/json", "locat...b4%2Bo93zZ%2ByKoge9y8HXKO248k73CbKRvhENJTh"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6144534Z       # ./spec/integration_spec.rb:172:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6144820Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6144989Z   14) API Endpoints DELETE /api/links/:id rejects deletion by non-admin
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6145388Z       Failure/Error: expect(last_response.status).to eq(403)
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6145608Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6145683Z         expected: 403
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6145865Z              got: 302
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6145977Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6146053Z         (compared using ==)
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6146370Z       # ./spec/integration_spec.rb:179:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6146651Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6146832Z   15) Dashboard GET /dashboard displays dashboard for authenticated users
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6147341Z       Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6148283Z         expected `#<Rack::MockResponse:0x00007f9e3a6183e0 @original_headers={"location"=>"http://example.org/login", "c...R6IJ17z%2BwCv%2F7%2B6mA%2B%2F9ZsAOBM0pxabv"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6149286Z       # ./spec/integration_spec.rb:195:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6149570Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6149693Z   16) Dashboard GET /dashboard shows link statistics
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6150050Z       Failure/Error: expect(last_response.body).to include('2')
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6150366Z         expected "" to include "2"
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6150707Z       # ./spec/integration_spec.rb:201:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6150990Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6151107Z   17) Settings GET /settings displays settings page
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6151424Z       Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6152658Z         expected `#<Rack::MockResponse:0x00007f9e3b4c1040 @original_headers={"content-type"=>"text/html;charset=utf-8",...I03JXNLq%2FQV6nC1h7k0caRZCBttJ6f3tgjH4Yyui"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6153828Z       # ./spec/integration_spec.rb:222:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6154109Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6154334Z   18) Settings POST /settings/password updates password with correct current password
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6154755Z       Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6155713Z         expected `#<Rack::MockResponse:0x00007f9e3a4ad2a8 @original_headers={"location"=>"http://example.org/login", "c...fjsWm9qqnkb0P1JCBhwTOquDQGHsAKkapNOqbCr30t"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6156739Z       # ./spec/integration_spec.rb:233:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6157022Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6157209Z   19) Settings POST /settings/password rejects incorrect current password
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6157712Z       Failure/Error: expect(last_response.body).to include('Current password is incorrect')
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6158183Z         expected "" to include "Current password is incorrect"
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6158591Z       # ./spec/integration_spec.rb:242:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6158875Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6159036Z   20) Settings POST /settings/password rejects mismatched passwords
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6159536Z       Failure/Error: expect(last_response.body).to include('Password confirmation does not match')
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6160043Z         expected "" to include "Password confirmation does not match"
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6160469Z       # ./spec/integration_spec.rb:250:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6160744Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6160889Z Finished in 9.64 seconds (files took 0.60803 seconds to load)
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6161200Z 34 examples, 20 failures
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6161337Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6161410Z Failed examples:
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6161726Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6161895Z rspec ./spec/app_spec.rb:11 # Sinatra app loads homepage
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6162301Z rspec ./spec/app_spec.rb:17 # Sinatra app requires login for settings page
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6162795Z rspec ./spec/app_spec.rb:23 # Sinatra app allows authenticated user to change password
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6163309Z rspec ./spec/app_spec.rb:44 # Sinatra app supports advanced search by category and tag
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6163856Z rspec ./spec/integration_spec.rb:9 # Authentication POST /login logs in with valid credentials
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6164400Z rspec ./spec/integration_spec.rb:48 # Links Management POST /links creates a new link
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6164915Z rspec ./spec/integration_spec.rb:55 # Links Management POST /links rejects invalid URL
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6165424Z rspec ./spec/integration_spec.rb:60 # Links Management POST /links rejects empty name
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6166218Z rspec ./spec/integration_spec.rb:103 # Links Management GET /links/:id/remove deletes link as admin
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6166859Z rspec ./spec/integration_spec.rb:110 # Links Management GET /links/:id/remove rejects deletion by non-admin
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6167476Z rspec ./spec/integration_spec.rb:153 # API Endpoints POST /api/links creates link as admin
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6168047Z rspec ./spec/integration_spec.rb:161 # API Endpoints POST /api/links rejects creation by non-admin
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6168640Z rspec ./spec/integration_spec.rb:170 # API Endpoints DELETE /api/links/:id deletes link as admin
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6169247Z rspec ./spec/integration_spec.rb:176 # API Endpoints DELETE /api/links/:id rejects deletion by non-admin
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6169893Z rspec ./spec/integration_spec.rb:193 # Dashboard GET /dashboard displays dashboard for authenticated users
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6170476Z rspec ./spec/integration_spec.rb:199 # Dashboard GET /dashboard shows link statistics
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6171002Z rspec ./spec/integration_spec.rb:220 # Settings GET /settings displays settings page
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6171850Z rspec ./spec/integration_spec.rb:228 # Settings POST /settings/password updates password with correct current password
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6172691Z rspec ./spec/integration_spec.rb:237 # Settings POST /settings/password rejects incorrect current password
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6173330Z rspec ./spec/integration_spec.rb:245 # Settings POST /settings/password rejects mismatched passwords
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6258814Z 
+Test (Ruby 3.3)	Run tests	2026-05-21T02:23:07.6374347Z ##[error]Process completed with exit code 1.
+Test (Ruby 3.2)	Run tests	﻿2026-05-21T02:22:53.5391339Z ##[group]Run mkdir -p tmp
+Test (Ruby 3.2)	Run tests	2026-05-21T02:22:53.5391700Z ^[[36;1mmkdir -p tmp^[[0m
+Test (Ruby 3.2)	Run tests	2026-05-21T02:22:53.5392165Z ^[[36;1mbundle exec rspec --format progress --format RspecJunitFormatter --out tmp/rspec.xml^[[0m
+Test (Ruby 3.2)	Run tests	2026-05-21T02:22:53.5432108Z shell: /usr/bin/bash -e {0}
+Test (Ruby 3.2)	Run tests	2026-05-21T02:22:53.5432585Z env:
+Test (Ruby 3.2)	Run tests	2026-05-21T02:22:53.5432799Z   RACK_ENV: test
+Test (Ruby 3.2)	Run tests	2026-05-21T02:22:53.5433257Z   SESSION_SECRET: test-secret-for-ci-only-at-least-64-characters-long-to-satisfy-rack-session
+Test (Ruby 3.2)	Run tests	2026-05-21T02:22:53.5434022Z ##[endgroup]
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.1861822Z FFF.FF...FFF....FF...FFFFFF.FFFF..
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3162499Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3163281Z Failures:
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3163598Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3164944Z   1) Sinatra app loads homepage
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3165642Z      Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3172414Z        expected `#<Rack::MockResponse:0x00007fb105009f70 @original_headers={"content-type"=>"text/html;charset=utf-8",...OCeHdagcusrTV3SVs9JaDHQBY%2B9mIsK8nBncL1fH"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3174668Z      # ./spec/app_spec.rb:13:in `block (2 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3175163Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3175397Z   2) Sinatra app requires login for settings page
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3175922Z      Failure/Error: expect(last_response.status).to eq(302)
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3176194Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3176295Z        expected: 302
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3176531Z             got: 404
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3176667Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3176769Z        (compared using ==)
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3177107Z      # ./spec/app_spec.rb:19:in `block (2 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3177376Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3177543Z   3) Sinatra app allows authenticated user to change password
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3177933Z      Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3178944Z        expected `#<Rack::MockResponse:0x00007fb10512d208 @original_headers={"content-type"=>"text/html;charset=utf-8",...%2BC8ZdxKybjKqh6ieHsTiMQt0Vgtsm3c9yAhJm1hX"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3180022Z      # ./spec/app_spec.rb:32:in `block (2 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3180288Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3180459Z   4) Sinatra app supports advanced search by category and tag
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3180838Z      Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3181829Z        expected `#<Rack::MockResponse:0x00007fb10515a640 @original_headers={"content-type"=>"text/html;charset=utf-8",...sqqUrzzqF9lTKK%2FYR6ysD7%2FzTuNV4eWlWE0tG2"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3182837Z      # ./spec/app_spec.rb:49:in `block (2 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3183101Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3183278Z   5) Authentication POST /login logs in with valid credentials
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3183656Z      Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3184926Z        expected `#<Rack::MockResponse:0x00007fb10518b380 @original_headers={"content-type"=>"text/html;charset=utf-8",...gyjmOD0csWCEdCNQ%2BFha8s4AkwRsG9VRcdIvKTg0"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3186020Z      # ./spec/integration_spec.rb:13:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3186333Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3186473Z   6) Links Management POST /links creates a new link
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3186849Z      Failure/Error: expect(last_response).to be_redirect
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3187872Z        expected `#<Rack::MockResponse:0x00007fb104b2ef78 @original_headers={"content-type"=>"text/html;charset=utf-8",...FsRv%2BG%2BKdQ4FLYkouK70HtoewhLnLmi0d3vVm0"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.redirect?` to be truthy, got false
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3188946Z      # ./spec/integration_spec.rb:50:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3189241Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3189629Z   7) Links Management POST /links rejects invalid URL
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3190018Z      Failure/Error: expect(last_response.status).to eq(400)
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3190263Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3190357Z        expected: 400
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3190577Z             got: 500
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3190843Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3190942Z        (compared using ==)
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3191292Z      # ./spec/integration_spec.rb:57:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3191590Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3191721Z   8) Links Management POST /links rejects empty name
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3192101Z      Failure/Error: expect(last_response.status).to eq(400)
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3192338Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3192431Z        expected: 400
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3192642Z             got: 500
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3192769Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3192865Z        (compared using ==)
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3193208Z      # ./spec/integration_spec.rb:62:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3193513Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3193895Z   9) Links Management GET /links/:id/remove deletes link as admin
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3194538Z      Failure/Error: user = User.create(username: username, role: role, email: email)
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3194881Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3194998Z      Sequel::UniqueConstraintViolation:
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3195418Z        SQLite3::ConstraintException: UNIQUE constraint failed: users.email
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3196033Z      # ./vendor/bundle/ruby/3.2.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/resultset.rb:43:in `step'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3196716Z      # ./vendor/bundle/ruby/3.2.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/resultset.rb:43:in `next'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3197374Z      # ./vendor/bundle/ruby/3.2.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/resultset.rb:49:in `each'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3198054Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:428:in `block in fetch_rows'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3198748Z      # ./vendor/bundle/ruby/3.2.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/database.rb:356:in `query'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3199474Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:273:in `block (2 levels) in _execute'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3200244Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/database/logging.rb:38:in `log_connection_yield'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3200957Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:273:in `block in _execute'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3201638Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/connection_pool/timed_queue.rb:87:in `hold'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3202315Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/database/connecting.rb:283:in `synchronize'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3203002Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:266:in `_execute'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3203631Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:184:in `execute'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3204628Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/dataset/actions.rb:1263:in `execute'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3205259Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:421:in `fetch_rows'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3205918Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/dataset/actions.rb:1095:in `with_sql_each'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3206580Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/dataset/actions.rb:1103:in `with_sql_first'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3207267Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/adapters/shared/sqlite.rb:703:in `insert_select'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3207944Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1799:in `_insert_select_raw'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3208563Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1772:in `_insert'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3209217Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1844:in `block (2 levels) in _save'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3210039Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1084:in `around_create'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3210661Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1841:in `block in _save'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3211391Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1084:in `around_save'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3211982Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1836:in `_save'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3212624Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1550:in `block (2 levels) in save'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3213324Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/database/transactions.rb:264:in `_transaction'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3214373Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/database/transactions.rb:239:in `block in transaction'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3215128Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/connection_pool/timed_queue.rb:92:in `hold'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3215801Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/database/connecting.rb:283:in `synchronize'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3216492Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/database/transactions.rb:197:in `transaction'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3217164Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:2004:in `checked_transaction'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3217803Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1550:in `block in save'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3218456Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1990:in `checked_save_failure'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3219072Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1550:in `save'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3219653Z      # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:256:in `create'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3220117Z      # ./spec/spec_helper.rb:34:in `create_user'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3220532Z      # ./spec/integration_spec.rb:100:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3220945Z      # ------------------
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3221192Z      # --- Caused by: ---
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3221450Z      # SQLite3::ConstraintException:
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3221758Z      #   UNIQUE constraint failed: users.email
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3222256Z      #   ./vendor/bundle/ruby/3.2.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/resultset.rb:43:in `step'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3222651Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3222854Z   10) Links Management GET /links/:id/remove rejects deletion by non-admin
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3223376Z       Failure/Error: user = User.create(username: username, role: role, email: email)
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3223861Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3223981Z       Sequel::UniqueConstraintViolation:
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3224399Z         SQLite3::ConstraintException: UNIQUE constraint failed: users.email
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3224987Z       # ./vendor/bundle/ruby/3.2.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/resultset.rb:43:in `step'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3225655Z       # ./vendor/bundle/ruby/3.2.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/resultset.rb:43:in `next'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3226314Z       # ./vendor/bundle/ruby/3.2.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/resultset.rb:49:in `each'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3226994Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:428:in `block in fetch_rows'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3227687Z       # ./vendor/bundle/ruby/3.2.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/database.rb:356:in `query'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3228406Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:273:in `block (2 levels) in _execute'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3229153Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/database/logging.rb:38:in `log_connection_yield'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3229993Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:273:in `block in _execute'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3230672Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/connection_pool/timed_queue.rb:87:in `hold'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3231441Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/database/connecting.rb:283:in `synchronize'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3232089Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:266:in `_execute'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3232714Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:184:in `execute'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3233324Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/dataset/actions.rb:1263:in `execute'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3234083Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/adapters/sqlite.rb:421:in `fetch_rows'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3234733Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/dataset/actions.rb:1095:in `with_sql_each'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3235389Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/dataset/actions.rb:1103:in `with_sql_first'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3236089Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/adapters/shared/sqlite.rb:703:in `insert_select'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3236775Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1799:in `_insert_select_raw'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3237394Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1772:in `_insert'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3238053Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1844:in `block (2 levels) in _save'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3238714Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1084:in `around_create'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3239337Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1841:in `block in _save'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3239964Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1084:in `around_save'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3240559Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1836:in `_save'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3241202Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1550:in `block (2 levels) in save'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3241895Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/database/transactions.rb:264:in `_transaction'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3242647Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/database/transactions.rb:239:in `block in transaction'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3243358Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/connection_pool/timed_queue.rb:92:in `hold'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3244261Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/database/connecting.rb:283:in `synchronize'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3244987Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/database/transactions.rb:197:in `transaction'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3245666Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:2004:in `checked_transaction'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3246446Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1550:in `block in save'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3247248Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1990:in `checked_save_failure'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3247881Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:1550:in `save'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3248455Z       # ./vendor/bundle/ruby/3.2.0/gems/sequel-5.104.0/lib/sequel/model/base.rb:256:in `create'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3248916Z       # ./spec/spec_helper.rb:34:in `create_user'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3249336Z       # ./spec/integration_spec.rb:100:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3249726Z       # ------------------
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3250108Z       # --- Caused by: ---
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3250374Z       # SQLite3::ConstraintException:
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3250768Z       #   UNIQUE constraint failed: users.email
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3251262Z       #   ./vendor/bundle/ruby/3.2.0/gems/sqlite3-2.9.4-x86_64-linux-gnu/lib/sqlite3/resultset.rb:43:in `step'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3251765Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3251916Z   11) API Endpoints POST /api/links creates link as admin
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3252279Z       Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3253285Z         expected `#<Rack::MockResponse:0x00007fb1050d73a8 @original_headers={"content-type"=>"application/json", "locat...6gJlzfc38Z5DxdFFqvCGW6wm3eDCPh%2F0xtBr83B1"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3254650Z       # ./spec/integration_spec.rb:156:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3254965Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3255138Z   12) API Endpoints POST /api/links rejects creation by non-admin
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3255570Z       Failure/Error: expect(last_response.status).to eq(403)
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3255813Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3255908Z         expected: 403
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3256127Z              got: 302
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3256264Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3256361Z         (compared using ==)
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3256712Z       # ./spec/integration_spec.rb:165:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3257013Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3257254Z   13) API Endpoints DELETE /api/links/:id deletes link as admin
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3257990Z       Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3259060Z         expected `#<Rack::MockResponse:0x00007fb1051bd2b8 @original_headers={"content-type"=>"application/json", "locat...q2Q%2FVS8xYZp3z5J4f9bIIW8Df50w%2FZwA74RMlY"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3260124Z       # ./spec/integration_spec.rb:172:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3260431Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3260625Z   14) API Endpoints DELETE /api/links/:id rejects deletion by non-admin
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3261062Z       Failure/Error: expect(last_response.status).to eq(403)
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3261307Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3261403Z         expected: 403
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3261624Z              got: 302
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3261757Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3261854Z         (compared using ==)
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3262213Z       # ./spec/integration_spec.rb:179:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3262522Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3262717Z   15) Dashboard GET /dashboard displays dashboard for authenticated users
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3263145Z       Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3264303Z         expected `#<Rack::MockResponse:0x00007fb1051b1058 @original_headers={"location"=>"http://example.org/login", "c...9Wp2Vb7JmmQOZzN1V7rjUZFCB6DHtvXTpchYppAI1H"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3265394Z       # ./spec/integration_spec.rb:195:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3265699Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3265838Z   16) Dashboard GET /dashboard shows link statistics
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3266226Z       Failure/Error: expect(last_response.body).to include('2')
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3266586Z         expected "" to include "2"
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3266967Z       # ./spec/integration_spec.rb:201:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3267264Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3267401Z   17) Settings GET /settings displays settings page
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3267745Z       Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3268726Z         expected `#<Rack::MockResponse:0x00007fb104b411a0 @original_headers={"content-type"=>"text/html;charset=utf-8",...HWkiHaKKjGIIvJoHnlgH7g0Hmb%2FC285S9D37K9HU"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3269926Z       # ./spec/integration_spec.rb:222:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3270226Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3270464Z   18) Settings POST /settings/password updates password with correct current password
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3270927Z       Failure/Error: expect(last_response).to be_ok
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3272005Z         expected `#<Rack::MockResponse:0x00007fb104b6c9e0 @original_headers={"location"=>"http://example.org/login", "c...5qf92g3IaNB9uZ69vej8OQnkhZV%2BOLpVCdDXO5L4"], @path="/", @domain=nil, @expires=nil, @secure=false>}>.ok?` to be truthy, got false
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3273053Z       # ./spec/integration_spec.rb:233:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3273350Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3273552Z   19) Settings POST /settings/password rejects incorrect current password
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3274221Z       Failure/Error: expect(last_response.body).to include('Current password is incorrect')
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3274738Z         expected "" to include "Current password is incorrect"
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3275192Z       # ./spec/integration_spec.rb:242:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3275499Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3275684Z   20) Settings POST /settings/password rejects mismatched passwords
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3276233Z       Failure/Error: expect(last_response.body).to include('Password confirmation does not match')
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3276792Z         expected "" to include "Password confirmation does not match"
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3277266Z       # ./spec/integration_spec.rb:250:in `block (3 levels) in <top (required)>'
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3277563Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3277733Z Finished in 9.67 seconds (files took 0.76125 seconds to load)
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3278078Z 34 examples, 20 failures
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3278231Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3278326Z Failed examples:
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3278457Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3278604Z rspec ./spec/app_spec.rb:11 # Sinatra app loads homepage
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3279052Z rspec ./spec/app_spec.rb:17 # Sinatra app requires login for settings page
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3279582Z rspec ./spec/app_spec.rb:23 # Sinatra app allows authenticated user to change password
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3280131Z rspec ./spec/app_spec.rb:44 # Sinatra app supports advanced search by category and tag
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3280730Z rspec ./spec/integration_spec.rb:9 # Authentication POST /login logs in with valid credentials
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3281319Z rspec ./spec/integration_spec.rb:48 # Links Management POST /links creates a new link
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3281866Z rspec ./spec/integration_spec.rb:55 # Links Management POST /links rejects invalid URL
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3282424Z rspec ./spec/integration_spec.rb:60 # Links Management POST /links rejects empty name
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3283022Z rspec ./spec/integration_spec.rb:103 # Links Management GET /links/:id/remove deletes link as admin
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3283846Z rspec ./spec/integration_spec.rb:110 # Links Management GET /links/:id/remove rejects deletion by non-admin
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3284654Z rspec ./spec/integration_spec.rb:153 # API Endpoints POST /api/links creates link as admin
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3285271Z rspec ./spec/integration_spec.rb:161 # API Endpoints POST /api/links rejects creation by non-admin
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3285909Z rspec ./spec/integration_spec.rb:170 # API Endpoints DELETE /api/links/:id deletes link as admin
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3286575Z rspec ./spec/integration_spec.rb:176 # API Endpoints DELETE /api/links/:id rejects deletion by non-admin
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3287459Z rspec ./spec/integration_spec.rb:193 # Dashboard GET /dashboard displays dashboard for authenticated users
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3288087Z rspec ./spec/integration_spec.rb:199 # Dashboard GET /dashboard shows link statistics
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3288646Z rspec ./spec/integration_spec.rb:220 # Settings GET /settings displays settings page
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3289327Z rspec ./spec/integration_spec.rb:228 # Settings POST /settings/password updates password with correct current password
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3290219Z rspec ./spec/integration_spec.rb:237 # Settings POST /settings/password rejects incorrect current password
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3290906Z rspec ./spec/integration_spec.rb:245 # Settings POST /settings/password rejects mismatched passwords
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3378483Z 
+Test (Ruby 3.2)	Run tests	2026-05-21T02:23:04.3484688Z ##[error]Process completed with exit code 1.

@@ -14,7 +14,8 @@ RSpec.configure do |config|
   config.include Rack::Test::Methods
 
   config.before(:suite) do
-    # DB is already configured in app.rb and tables are created when models are loaded
+    Sinatra::Application.settings.raise_errors = true
+    Sinatra::Application.settings.show_exceptions = false
   end
 
   config.before do
@@ -30,7 +31,19 @@ def app
   Sinatra::Application
 end
 
-def create_user(username: 'testuser', password: 'password123', role: 'editor', email: 'test@hamzi.dev')
+def create_user(username: nil, password: 'password123', role: 'editor', email: nil)
+  if username.nil?
+    if User[username: 'testuser'].nil?
+      username = 'testuser'
+    else
+      i = 1
+      while User[username: "testuser#{i}"]
+        i += 1
+      end
+      username = "testuser#{i}"
+    end
+  end
+  email ||= "#{username}@hamzi.dev"
   user = User.create(username: username, role: role, email: email)
   user.password = password
   user.save
