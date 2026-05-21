@@ -16,7 +16,7 @@ end
 class User < Sequel::Model
   ROLES = %w[admin editor reader].freeze
 
-  one_to_many :oauth_providers
+  one_to_many :oauth_providers, class: :OAuthProvider
   one_to_many :email_notifications
 
   def before_create

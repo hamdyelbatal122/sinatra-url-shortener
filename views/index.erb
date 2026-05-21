@@ -47,13 +47,13 @@
     <form method="get" action="/links/search" id="search-form">
       <div class="form-row" style="align-items:flex-end; gap:8px;">
         <div class="form-group">
-          <input type="text" name="q" placeholder="Search by name or URL…" value="<%= h(params[:q].to_s) %>">
+          <input type="text" name="q" placeholder="Search by name or URL…" value="<%= params[:q].to_s %>">
         </div>
         <div class="form-group" style="max-width:160px;">
-          <input type="text" name="category" placeholder="Category" value="<%= h(params[:category].to_s) %>">
+          <input type="text" name="category" placeholder="Category" value="<%= params[:category].to_s %>">
         </div>
         <div class="form-group" style="max-width:160px;">
-          <input type="text" name="tag" placeholder="Tag" value="<%= h(params[:tag].to_s) %>">
+          <input type="text" name="tag" placeholder="Tag" value="<%= params[:tag].to_s %>">
         </div>
         <div style="flex-shrink:0;">
           <button type="submit" class="btn btn-ghost">Search</button>
