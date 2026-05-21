@@ -99,7 +99,7 @@ end
 
 get '/:name/?*?' do
   link = Link[name: params[:name]]
-  halt 404 unless link
+  pass unless link
   link.hit!
   parts = (params[:splat].first || '').split('/')
   url = link.url
