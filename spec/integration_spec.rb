@@ -160,7 +160,7 @@ describe 'API Endpoints' do
     end
 
     it 'rejects creation by non-admin' do
-      @user.update(role: 'editor')
+      @user.update(role: 'reader')
       post '/api/links', JSON.generate(name: 'new-link', url: 'https://new.hamzi.dev'),
            'CONTENT_TYPE' => 'application/json'
       expect(last_response.status).to eq(403)
