@@ -2,6 +2,11 @@ require 'sinatra'
 require 'json'
 require_relative '../models/link'
 
+# Pure-Ruby LIKE pattern escape (%, _, \) — no Sequel extension needed
+def sql_like_escape(str)
+  str.gsub(/[%_\\]/) { |c| "\\#{c}" }
+end
+
 get '/' do
   @links = Link.order(Sequel.desc(:hits)).all
   erb :index
@@ -37,7 +42,7 @@ end
 
 get '/links/suggest' do
   query = params[:q]
-  escaped = DB.escape_like(query.to_s)
+  escaped = sql_like_escape(query.to_s)
   results = Link.where(Sequel.like(:name, "#{escaped}%")).or(Sequel.like(:url, "%#{escaped}%"))
   results = results.all.map(&:name)
   content_type :json
@@ -56,17 +61,17 @@ get '/links/search' do
     dataset = Link.dataset
 
     unless query.empty?
-      escaped_query = DB.escape_like(query)
+      escaped_query = sql_like_escape(query)
       dataset = dataset.where(Sequel.like(:name, "%#{escaped_query}%")).or(Sequel.like(:url, "%#{escaped_query}%"))
     end
 
     unless category.empty?
-      escaped_category = DB.escape_like(category)
+      escaped_category = sql_like_escape(category)
       dataset = dataset.where(Sequel.like(:category, "%#{escaped_category}%"))
     end
 
     unless tag.empty?
-      escaped_tag = DB.escape_like(tag)
+      escaped_tag = sql_like_escape(tag)
       dataset = dataset.where(Sequel.like(:tags, "%#{escaped_tag}%"))
     end
 
