@@ -75,7 +75,7 @@ docker compose up
 docker build -t sinatra-shortener .
 
 docker run -p 4567:4567 \
-  -e SESSION_SECRET=your-secret-key \
+  -e SESSION_SECRET=$(openssl rand -hex 32) \
   -e RACK_ENV=production \
   -v ./db:/app/db \
   sinatra-shortener

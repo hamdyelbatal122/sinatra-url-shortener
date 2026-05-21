@@ -1,6 +1,6 @@
 ENV['RACK_ENV'] = 'test'
 ENV['DATABASE_URL'] = 'sqlite://db/test.sqlite3'
-ENV['SESSION_SECRET'] = 'test-secret'
+ENV['SESSION_SECRET'] = 'a' * 64
 
 require 'rack/test'
 require 'rspec'

@@ -34,7 +34,7 @@ jobs:
           bundle exec rspec --format progress --format RspecJunitFormatter --out tmp/rspec.xml
         env:
           RACK_ENV: test
-          SESSION_SECRET: test-secret-for-ci-only
+          SESSION_SECRET: test-secret-for-ci-only-at-least-64-characters-long-to-satisfy-rack-session
         continue-on-error: false
 
       - name: Upload test results
