@@ -56,6 +56,9 @@ error 404 do
 end
 
 error 500 do
+  if ENV['RACK_ENV'] == 'test' && env['sinatra.error']
+    raise env['sinatra.error']
+  end
   if request.path.start_with?('/api')
     content_type :json
     halt 500, { error: 'Internal server error' }.to_json
