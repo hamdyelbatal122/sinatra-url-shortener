@@ -47,6 +47,11 @@ end
 
 Rack::Attack.cache.store = MemoryStore.new
 
+# Bypass rate limiting in test environment
+Rack::Attack.safelist('bypass_in_test') do |req|
+  ENV['RACK_ENV'] == 'test'
+end
+
 # ── Throttle rules ──────────────────────────────────────────────────────────
 
 # Global: 300 requests per 5 minutes per IP (skip static assets)
