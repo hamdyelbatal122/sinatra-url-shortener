@@ -234,4 +234,4 @@ Pull requests are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before
 
 ## License
 
-[MIT](LICENSE) — Hamdy Elbatal
+The MIT License (MIT). Please see [LICENSE.md](LICENSE.md) for more information.
